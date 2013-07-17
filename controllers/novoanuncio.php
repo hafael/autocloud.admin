@@ -21,42 +21,24 @@ class NovoAnuncio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$data = array();
-		$this->load->model('anunciante');
 		$this->load->helper('url');
+		$this->load->model('anunciante');
+		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
+		$this->anunciante->define($this->session->userdata('id_login'));
+		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-
-			redirect('login/?redirectURL='.current_url(), 'refresh');
+			redirect('../login/?redirectURL='.current_url(), 'refresh');
 		}
 	}
 
 	public function index(){
 		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anuncio');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
+        
 		
-		if($this->input->post('TB_Anunciante_id')){
-
-			$array_insert = array(
-				'TB_Anunciante_id' => $this->input->post('TB_Anunciante_id'),
-				'TipoVeiculo' => $this->input->post('TipoVeiculo'),
-				'Descricao' => $this->input->post('Descricao'),
-				'ValorVenda' => $this->input->post('ValorVenda')
-			);	
-
-			$this->anunciante->adiciona($array_insert);
-
-			redirect('meus-anuncios/anuncio/'.$this->anuncio->id, 'refresh');
-		}
-
-		
-
-        $this->load->view('novo_anuncio');
+        $this->load->view('escolha-tipo-anuncio');
 	}
+
+
 
 	
 	

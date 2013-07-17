@@ -234,64 +234,6 @@
           </div>
           
         </form>
-        <form class="form-horizontal" id="fotos" method="post" action="some_action" enctype="multipart/form-data" />
-          <div class="span12">
-            <h3>Fotos</h3>
-            <div class="span3">
-              <h5>Frente</h5>
-              <img src="<?=APPPATH?>views/img/img_300x200.png" class="img-polaroid">
-              <div class="btn-group">
-                <button class="btn">Visualizar</button>
-                <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#"><i class="icon-edit"></i> Alterar</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#"><i class="icon-trash"></i> Excluir</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="span3">
-              <h5>Traseira</h5>
-              <img src="<?=APPPATH?>views/img/img_300x200.png" class="img-polaroid">
-              <div class="btn-group">
-                <button class="btn">Visualizar</button>
-                <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#"><i class="icon-edit"></i> Alterar</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#"><i class="icon-trash"></i> Excluir</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="span3">
-              <h5>Lateral</h5>
-              <img src="<?=APPPATH?>views/img/img_300x200.png" class="img-polaroid">
-              <div class="btn-group">
-                <button class="btn">Visualizar</button>
-                <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#"><i class="icon-edit"></i> Alterar</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#"><i class="icon-trash"></i> Excluir</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="span3">
-              <h5>Interior</h5>
-              <img src="<?=APPPATH?>views/img/img_300x200.png" class="img-polaroid">
-              <div class="btn-group">
-                <button class="btn">Visualizar</button>
-                <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="#"><i class="icon-edit"></i> Alterar</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#"><i class="icon-trash"></i> Excluir</a></li>
-                </ul>
-              </div>
-            </div>
-            
-          </div>
-        </form>
       </div>
       
       <?php include_once('includes/footer.php') ?>

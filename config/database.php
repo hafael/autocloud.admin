@@ -65,10 +65,10 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 
-$db['autocloudv2']['hostname'] = 'mysql01.autocloud.hospedagemdesites.ws';
-$db['autocloudv2']['username'] = 'autocloud';
+$db['autocloudv2']['hostname'] = 'mysql01.autocloud2.hospedagemdesites.ws';
+$db['autocloudv2']['username'] = 'autocloud2';
 $db['autocloudv2']['password'] = 'ac655321';
-$db['autocloudv2']['database'] = 'autocloud';
+$db['autocloudv2']['database'] = 'autocloud2';
 $db['autocloudv2']['dbdriver'] = 'mysql';
 $db['autocloudv2']['dbprefix'] = '';
 $db['autocloudv2']['pconnect'] = TRUE;
