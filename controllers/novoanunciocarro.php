@@ -45,10 +45,18 @@ class NovoAnuncioCarro extends CI_Controller {
 
 		if($this->input->post('TipoVeiculo')=="1"){
 
+			$titulo_anuncio = $this->input->post('fabricanteText')
+							." ".$this->input->post('modeloText')
+							." ".$this->input->post('versaoText')
+							." ".$this->input->post('combustivel')
+							." ".$this->input->post('AnoFabText')
+							."/".$this->input->post('AnoModText');
+
 			$array_tb_anuncio = array(
 				'TB_Anunciante_id' => $this->anunciante->id,
 				'TipoVeiculo' => $this->input->post('TipoVeiculo'),
 				'TipoAnuncio' => $this->input->post('TipoAnuncio'),
+				'Titulo' => $titulo_anuncio,
 				'Descricao' => "Nenhuma descrição definida",
 				'ValorVenda' => $this->input->post('valor_venda'),
 				'TelContato' => $this->input->post('tel_contato')
@@ -87,6 +95,14 @@ class NovoAnuncioCarro extends CI_Controller {
 
 	}
 
+	public function carro(){
+		$data['TipoVeiculo'] = 1;
+
+		// View tipo carro
+		$this->load->view('novo-anuncio-carro', $data);
+
+	}
+
 	public function fotos($id_anuncio){
 
     	
@@ -98,6 +114,8 @@ class NovoAnuncioCarro extends CI_Controller {
         $this->load->view('novo-anuncio-carro-foto', array('error' => ' ' ));
 
 	}
+
+
 
 	public function sucesso($id_anuncio){
 

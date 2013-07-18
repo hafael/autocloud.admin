@@ -11,17 +11,15 @@
     <?php include_once('includes/navbar.php') ?>
 
     <div class="container">
-      <h1>Meus anúncios</h1>
-      <p class="lead">Gerenciar anúncio</p>
-
-      
+      <h1>Criar novo anúncio</h1>
+      <p class="lead">Comece informando o veículo</p>
       <div class="row-fluid">
         <?php 
 
 
-        switch ($this->anuncio->TipoVeiculo) {
+        switch ($TipoVeiculo) {
           case 1:
-            include 'anuncio/carro/gerenciar.php';
+            include 'anuncio/carro/novo.php';
             break;
           case 2:
             echo "moto";
@@ -33,116 +31,34 @@
 
         ?>
       </div>
-      <hr>
-      <div class="row-fluid">
-        
-        
-        <form action="http://localhost/autocloud/admin/meusanuncios/do_upload/<?=$this->anuncio->id?>" id="fotos" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-          
-          <h3>Fotos</h3>
-          <div class="row-fuid clearfix fotos">
-            <?php
-            if($array_imagens){
-              $i=1;
-              foreach ($array_imagens as $row) {
-              ?>
-                <div class="span2 foto">
-                  <h5>Foto <?=$i?></h5>
-                  <div class="img-polaroid">
-                    <img src="http://localhost/autocloud/uploads/thumb_<?=$row->ImageSRC?>" >
-                  </div>
-                  <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
-                </div>
-              <?php
-              $i++;
-              }
-              if($i < 6){
-                while( $i <= 6 ){
-                  ?>
-                  <div class="span2 foto">
-                    <h5>Foto <?=$i?></h5>
-                    <div class="img-polaroid">
-                      <img src="http://localhost/autocloud/uploads/img_140x140.png" >
-                    </div>
-                    <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
-                  </div>
-                  <?php
-                  $i++;
-                }
-              }
-            }else{
-              $i=1;
-              while( $i <= 6 ){
-
-                ?>
-                <div class="span2 foto">
-                  <h5>Foto <?=$i?></h5>
-                  <div class="img-polaroid">
-                    <img src="http://localhost/autocloud/uploads/img_140x140.png" >
-                  </div>
-                  <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
-                </div>
-                <?php
-                $i++;
-              }
-            }
-            ?>
-            
-            
-            
-          </div>
-
-          <div class="control-group well clearfix">
-            <div class="controls">
-              <button type="submit" class="btn btn-primary btn-large pull-right">Enviar fotos</button>
-            </div>
-          </div>
-          
-        </form>
-
-      </div>
+      
       <?php include_once('includes/footer.php') ?>
     </div> <!-- /container -->
 
 
     <?php include_once('includes/scripts_footer.php') ?>
     <style type="text/css">
-      .fotos > div,
-      .fotos > div .img-polaroid{
+      form#fotos > div > div{
         margin-bottom: 20px;
       }
-      .fotos > div .img-polaroid{
-        min-height: 160px;
-        max-width: 160px;
-      }
-      .fotos .foto img{
-        width: 100%;
-        max-height: 160px;
-        max-width: 160px;
-      }
-      .fotos .foto .file-input-name{
-        width: 100%;
+      form#fotos .btn-group{
         display: block;
-        overflow: hidden;
-        margin-left: 0;
-        text-align: center;
+        margin:10px auto;
       }
     </style>
     <script type="text/javascript">
-      $(document).ready(function(){
-        $('input[type=file]').bootstrapFileInput();
-        $("#valor_venda").maskMoney({thousands:'.', decimal:','});
-      });
+      $("#valor_venda").maskMoney({thousands:'.', decimal:','});
       $("#fabricante").select2({
         placeholder: "Aguarde",
         allowClear: true
       });
+
       //Carrega Fabricantes
       $.ajax({
         type: 'GET',
-        url: 'http://localhost/autocloud/admin/novoanuncio/get_fabricantes/',
+        url: 'http://localhost/autocloud/admin/novoanunciocarro/get_fabricantes/',
         success: function (data){
-          $('#fabricante').append('<option disabled></option>');
+          $('#fabricante').html('<option></option>');
           $.each(data, function(i, fabricante){
             $('#fabricante').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
           });
@@ -154,12 +70,14 @@
         }
       });
 
+
       $('#fabricante').change(function(){
         var fabricante_id = $(this).val();
+        $('#modelo').empty();
         $('#modelo').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanuncio/get_modelos/'+fabricante_id,
+          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_modelos/'+fabricante_id,
           success: function (data){
             $('#modelo').html('<option></option>');
             $.each(data, function(i, modelo){
@@ -173,7 +91,6 @@
             $('#fabricante option:selected').each(function () {
               $('#fabricanteText').val($(this).text());
             });
-            //$('#modelo, #anoFab, #anoMod, #versao').html('<option></option>').select2();
           }
         });
       });
@@ -183,7 +100,7 @@
         $('#anoFab').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanuncio/get_ano_fab/'+fabricante_id,
+          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_ano_fab/'+fabricante_id,
           success: function (data){
             $('#anoFab').html('<option></option>');
             $.each(data, function(i, modelo){
@@ -206,7 +123,7 @@
         $('#anoMod').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanuncio/get_ano_mod/'+fabricante_id,
+          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_ano_mod/'+fabricante_id,
           success: function (data){
             $('#anoMod').html('<option></option>');
             $.each(data, function(i, modelo){
@@ -229,7 +146,7 @@
         $('#versao').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanuncio/get_versao/'+fabricante_id,
+          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_versao/'+fabricante_id,
           success: function (data){
             $('#versao').html('<option></option>');
             $.each(data, function(i, modelo){

@@ -173,6 +173,25 @@
 			return (int)$this->data_base_object->insert_id();
 	
 	    }
+
+	    
+
+	    function edita($id_anuncio, $array_dados){
+    		//load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+			
+			//cria consulta
+			$this->data_base_object->where('TB_Anuncio_id', (int)$id_anuncio);
+			$this->data_base_object->update($this->nome_tabela, $array_dados);
+
+			//$this->data_base_object->update($this->nome_tabela, $array_dados);
+			
+			//Define o objeto com o last id do banco	
+			$this->define((int)$id_anuncio);
+			
+			return (int)$id_anuncio;
+	
+	    }
 		
 
 	}

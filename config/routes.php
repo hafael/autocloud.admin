@@ -41,9 +41,9 @@
 $route['default_controller'] = "home";
 
 /* Admin Routes*/
-$route['admin/meus-anuncios'] = "admin/meusanuncios";
+$route['meus-anuncios'] = "meusanuncios";
 $route['novo-anuncio'] = "novoanuncio";
-$route['novo-anuncio-carro'] = "novoanunciocarro";
+$route['novo-anuncio-carro'] = "novoanuncio/carro";
 $route['novo-anuncio-carro/fotos'] = "novoanunciocarro/fotos";
 $route['admin/meus-dados'] = "admin/meusdados";
 $route['admin/alterar-senha'] = "admin/alterarsenha";

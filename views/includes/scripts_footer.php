@@ -17,3 +17,4 @@
 <script src="<?=base_url()?>applications/admin/views/bootstrap/js/bootstrap-carousel.js"></script>
 <script src="<?=base_url()?>applications/admin/views/bootstrap/js/bootstrap-typeahead.js"></script>
 <script src="<?=base_url()?>applications/admin/views/bootstrap/js/bootstrap-fileinput.js"></script>
+<script src="<?=base_url()?>applications/admin/views/js/jquery.maskMoney.js"></script>

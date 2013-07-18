@@ -101,7 +101,34 @@
 			foreach ($query->result() as $row){
 				$array_objetos[] = $row;
 			}
-			return $array_objetos;
+
+			if($query->num_rows()<1){
+				return false;
+			}else{
+				return $array_objetos;
+			}
+			
+	    }
+
+	    function mostra($id_anunciante, $id_anuncio, $indexlist) {
+	        //load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+
+			//cria consulta
+			$this->data_base_object->where('TB_Anunciante_id', $id_anunciante);
+			$this->data_base_object->where('TB_Anuncio_id', $id_anuncio);
+			$this->data_base_object->where('IndexList', $indexlist);
+			$this->data_base_object->limit(1);
+
+
+			//executa query
+			$query = $this->data_base_object->get_where($this->nome_tabela);
+
+			foreach ($query->result() as $row){
+				//$array_objetos[] = $row;
+				echo $row->ImageSRC;
+			}
+			return $query;
 	    }
 
 	    function adiciona($array_dados){

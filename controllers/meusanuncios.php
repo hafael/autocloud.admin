@@ -27,6 +27,7 @@ class MeusAnuncios extends CI_Controller {
 		$this->load->helper('directory');
 		$this->load->library('upload');
         $this->load->library('image_lib');
+        $this->load->library('moedas');
 		$this->load->model('anunciante');
 		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
 		$this->load->model('TB_Anuncio','anuncio');
@@ -42,99 +43,73 @@ class MeusAnuncios extends CI_Controller {
 	public function index(){
 		
         
-		if($this->input->post('TipoVeiculo')=="1"){
-
-			$array_tb_anuncio = array(
-				'TB_Anunciante_id' => $this->anunciante->id,
-				'TipoVeiculo' => $this->input->post('TipoVeiculo'),
-				'TipoAnuncio' => $this->input->post('TipoAnuncio'),
-				'Descricao' => "Nenhuma descrição definida",
-				'ValorVenda' => $this->input->post('valor_venda'),
-				'TelContato' => $this->input->post('tel_contato')
-			);
-			$this->anuncio->adiciona($array_tb_anuncio);
-
-			$array_tb_anuncio_carro = array(
-				'TB_Anuncio_id' => $this->anuncio->id,
-				'Montadora' => $this->input->post('fabricanteText'),
-				'Modelo' => $this->input->post('modeloText'),
-				'AnoFab' => $this->input->post('AnoFabText'),
-				'AnoMod' => $this->input->post('AnoModText'),
-				'Versao' => $this->input->post('versaoText'),
-				'TB_FabricanteVeiculo_id' => $this->input->post('fabricante'),
-				'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => $this->input->post('modelo'),
-				'TB_AnoFabricacaoVeiculo_TB_ModeloVeiculo_id' => $this->input->post('anoFab'),
-				'TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id' => $this->input->post('anoMod'),
-				'TB_VersaoVeiculo_id' => $this->input->post('versao'),
-				'ArCondicionado' => $this->input->post('ar_condicionado'),
-				'VidroEletrico' => $this->input->post('vidro_eletrico'),
-				'DirecaoHidraulica' => $this->input->post('direcao_hidraulica'),
-				'AirBag' => $this->input->post('air_bag'),
-				'GasNatural' => $this->input->post('gas_natural'),
-				'Blindado' => $this->input->post('blindado'),
-				'Combustivel' => $this->input->post('combustivel')
-			);
-			$this->anuncio_carro->adiciona($array_tb_anuncio_carro);
-
-			//$this->anuncio->adiciona($array_insert);
-
-			redirect('meus-anuncios/anuncio/'.$this->anuncio->id, 'refresh');
-		}
 		
 
-        $this->load->view('novo_anuncio');
+		$data['array_anuncios'] = $this->anuncio->lista($this->anunciante->id);
+
+		$this->load->view('meus-anuncios', $data);
+
 	}
 	public function anuncio($id_anuncio){
 		
         
 		$this->anuncio->define($id_anuncio);
-		$this->anuncio_carro->define($id_anuncio);
+		
+		$data['array_imagens'] = $this->anuncio_imagens->lista($this->anunciante->id, $this->anuncio->id);
 
-		/*
-		if($this->input->post('TipoVeiculo')=="1"){
+		//Tipo 1 = carros
+		if($this->anuncio->TipoVeiculo==1){
+			$this->anuncio_carro->define($id_anuncio);
+			if($this->input->post('TipoVeiculo')=="1"){
 
-			$array_tb_anuncio = array(
-				'TB_Anunciante_id' => $this->anunciante->id,
-				'TipoVeiculo' => $this->input->post('TipoVeiculo'),
-				'TipoAnuncio' => $this->input->post('TipoAnuncio'),
-				'Descricao' => "Nenhuma descrição definida",
-				'ValorVenda' => $this->input->post('valor_venda'),
-				'TelContato' => $this->input->post('tel_contato')
-			);
-			$this->anuncio->adiciona($array_tb_anuncio);
+				$titulo_anuncio = $this->input->post('fabricanteText')
+							." ".$this->input->post('modeloText')
+							." ".$this->input->post('versaoText')
+							." ".$this->input->post('combustivel')
+							." ".$this->input->post('AnoFabText')
+							."/".$this->input->post('AnoModText');
 
-			$array_tb_anuncio_carro = array(
-				'TB_Anuncio_id' => $this->anuncio->id,
-				'Montadora' => $this->input->post('fabricanteText'),
-				'Modelo' => $this->input->post('modeloText'),
-				'AnoFab' => $this->input->post('AnoFabText'),
-				'AnoMod' => $this->input->post('AnoModText'),
-				'Versao' => $this->input->post('versaoText'),
-				'TB_FabricanteVeiculo_id' => $this->input->post('fabricante'),
-				'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => $this->input->post('modelo'),
-				'TB_AnoFabricacaoVeiculo_TB_ModeloVeiculo_id' => $this->input->post('anoFab'),
-				'TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id' => $this->input->post('anoMod'),
-				'TB_VersaoVeiculo_id' => $this->input->post('versao'),
-				'ArCondicionado' => $this->input->post('ar_condicionado'),
-				'VidroEletrico' => $this->input->post('vidro_eletrico'),
-				'DirecaoHidraulica' => $this->input->post('direcao_hidraulica'),
-				'AirBag' => $this->input->post('air_bag'),
-				'GasNatural' => $this->input->post('gas_natural'),
-				'Blindado' => $this->input->post('blindado'),
-				'Combustivel' => $this->input->post('combustivel')
-			);
-			$this->anuncio_carro->adiciona($array_tb_anuncio_carro);
+				
 
-			//$this->anuncio->adiciona($array_insert);
+				$array_tb_anuncio = array(
+					'Titulo' => $titulo_anuncio,
+					'Descricao' => "Nenhuma descrição definida",
+					'ValorVenda' => $this->moedas->bra2eua($this->input->post('valor_venda')),
+					'TelContato' => $this->input->post('tel_contato')
+				);
+				$this->anuncio->edita($this->anuncio->id, $array_tb_anuncio);
 
-			redirect('meus-anuncios/anuncio/'.$this->anuncio->id, 'refresh');
+				$array_tb_anuncio_carro = array(
+					'Montadora' => $this->input->post('fabricanteText'),
+					'Modelo' => $this->input->post('modeloText'),
+					'AnoFab' => $this->input->post('AnoFabText'),
+					'AnoMod' => $this->input->post('AnoModText'),
+					'Versao' => $this->input->post('versaoText'),
+					'TB_FabricanteVeiculo_id' => $this->input->post('fabricante'),
+					'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => $this->input->post('modelo'),
+					'TB_AnoFabricacaoVeiculo_TB_ModeloVeiculo_id' => $this->input->post('anoFab'),
+					'TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id' => $this->input->post('anoMod'),
+					'TB_VersaoVeiculo_id' => $this->input->post('versao'),
+					'ArCondicionado' => (bool)$this->input->post('ar_condicionado'),
+					'VidroEletrico' => (bool)$this->input->post('vidro_eletrico'),
+					'DirecaoHidraulica' => (bool)$this->input->post('direcao_hidraulica'),
+					'AirBag' => (bool)$this->input->post('air_bag'),
+					'GasNatural' => (bool)$this->input->post('gas_natural'),
+					'Blindado' => (bool)$this->input->post('blindado'),
+					'Combustivel' => $this->input->post('combustivel')
+				);
+				$this->anuncio_carro->edita($this->anuncio->id, $array_tb_anuncio_carro);
+
+				//var_dump($array_tb_anuncio);
+
+				redirect('meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+			}
+			// View tipo carro
+			$this->load->view('anuncio', $data);
 		}
-		*/
 
 		
-		
-
-        $this->load->view('anuncio', array('error' => ' ' ));
+        
 	}
 	public function get_fabricantes(){
 		$this->load->model('TB_FabricanteVeiculo','fabricante');
@@ -179,8 +154,9 @@ class MeusAnuncios extends CI_Controller {
 
 	// Upload & Resize in action
 	
-    function do_upload($id_anuncio)
-    {
+    function do_upload($id_anuncio){
+
+    	$this->anuncio->define($id_anuncio);
 
         // New name
         $new_file_name = md5(date('Y m d H:i:s').uniqid(mt_rand()));
@@ -195,152 +171,154 @@ class MeusAnuncios extends CI_Controller {
         $this->upload->initialize( $upload_conf );
     
         // Change $_FILES to new vars and loop them
-        foreach($_FILES['userfile'] as $key=>$val)
-        {
-            $i = 1;
-            foreach($val as $v)
-            {
-                $field_name = "file_".$i;
-                $_FILES[$field_name][$key] = $v;
-                $i++;   
-            }
-        }
-        // Unset the useless one ;)
-        unset($_FILES['userfile']);
-    
-        // Put each errors and upload data to an array
-        $error = array();
-        $success = array();
+        if($_FILES['userfile']){
+	        foreach($_FILES['userfile'] as $key=>$val)
+	        {
+	            $i = 1;
+	            foreach($val as $v)
+	            {
+	                $field_name = "file_".$i;
+	                $_FILES[$field_name][$key] = $v;
+	                $i++;   
+	            }
+	        }
+	        // Unset the useless one ;)
+	        unset($_FILES['userfile']);
+	    
+	        // Put each errors and upload data to an array
+	        $error = array();
+	        $success = array();
+	        
+	        // main action to upload each file
+	        $IndexList = 1;
+	        foreach($_FILES as $field_name => $file)
+	        {
+
+	            if ( ! $this->upload->do_upload($field_name))
+	            {
+	                // if upload fail, grab error 
+	                $error['upload'][] = $this->upload->display_errors();
+	            }
+	            else
+	            {
+	                // otherwise, put the upload datas here.
+	                // if you want to use database, put insert query in this loop
+	                $upload_data = $this->upload->data();
+
+	                
+	                
+	                $array_tb_anuncio = array(
+						'TB_Anunciante_id' => $this->anunciante->id,
+						'TB_Anuncio_id' => $id_anuncio,
+						'IndexList' => $IndexList,
+						'ImageSRC' => $upload_data['file_name']
+					);
+	                $this->anuncio_imagens->adiciona($array_tb_anuncio);
+	                $IndexList++;
+	                //Image resize High
+
+	                // set the resize config
+	                $resize_high = array(
+	                    // it's something like "/full/path/to/the/image.jpg" maybe
+	                    'source_image'   => $upload_data['full_path'], 
+	                    // and it's "/full/path/to/the/" + "thumb_" + "image.jpg
+	                    // or you can use 'create_thumbs' => true option instead
+	                    'new_image'      => $upload_data['file_path'].'high_'.$upload_data['file_name'],
+	                    'width'          => 1000,
+	                    'height'         => 1000,
+	                    'maintain_ratio' => TRUE
+	                    );
+
+	                // initializing
+	                $this->image_lib->initialize($resize_high);
+
+	                // do it!
+	                if ( ! $this->image_lib->resize())
+	                {
+	                    // if got fail.
+	                    $error['resize'][] = $this->image_lib->display_errors();
+	                }
+	                else
+	                {
+	                    // otherwise, put each upload data to an array.
+	                    $success[] = $upload_data;
+	                }
+
+
+					//Image resize Medium
+
+	                // set the resize config
+	                $resize_medium = array(
+	                    // it's something like "/full/path/to/the/image.jpg" maybe
+	                    'source_image'   => $upload_data['full_path'], 
+	                    // and it's "/full/path/to/the/" + "thumb_" + "image.jpg
+	                    // or you can use 'create_thumbs' => true option instead
+	                    'new_image'      => $upload_data['file_path'].'medium_'.$upload_data['file_name'],
+	                    'width'          => 600,
+	                    'height'         => 600,
+	                    'maintain_ratio' => TRUE
+	                    );
+
+	                // initializing
+	                $this->image_lib->initialize($resize_medium);
+
+	                // do it!
+	                if ( ! $this->image_lib->resize())
+	                {
+	                    // if got fail.
+	                    $error['resize'][] = $this->image_lib->display_errors();
+	                }
+	                else
+	                {
+	                    // otherwise, put each upload data to an array.
+	                    $success[] = $upload_data;
+	                }
+
+	                //Image resize thumb
+
+	                // set the resize config
+	                $resize_thumb = array(
+	                    // it's something like "/full/path/to/the/image.jpg" maybe
+	                    'source_image'   => $upload_data['full_path'], 
+	                    // and it's "/full/path/to/the/" + "thumb_" + "image.jpg
+	                    // or you can use 'create_thumbs' => true option instead
+	                    'new_image'      => $upload_data['file_path'].'thumb_'.$upload_data['file_name'],
+	                    'width'          => 600,
+	                    'height'         => 600,
+	                    'maintain_ratio' => TRUE
+	                    );
+
+	                // initializing
+	                $this->image_lib->initialize($resize_thumb);
+
+	                // do it!
+	                if ( ! $this->image_lib->resize())
+	                {
+	                    // if got fail.
+	                    $error['resize'][] = $this->image_lib->display_errors();
+	                }
+	                else
+	                {
+	                    // otherwise, put each upload data to an array.
+	                    $success[] = $upload_data;
+	                }
+
+
+	            }
+	        }
+
+	        // see what we get
+	        if(count($error > 0))
+	        {
+	            $data['error'] = $error;
+	        }
+	        else
+	        {
+	            $data['success'] = $upload_data;
+	        }
+    	}
         
-        // main action to upload each file
-        $IndexList = 1;
-        foreach($_FILES as $field_name => $file)
-        {
-
-            if ( ! $this->upload->do_upload($field_name))
-            {
-                // if upload fail, grab error 
-                $error['upload'][] = $this->upload->display_errors();
-            }
-            else
-            {
-                // otherwise, put the upload datas here.
-                // if you want to use database, put insert query in this loop
-                $upload_data = $this->upload->data();
-
-                
-                
-                $array_tb_anuncio = array(
-					'TB_Anunciante_id' => $this->anunciante->id,
-					'TB_Anuncio_id' => $id_anuncio,
-					'IndexList' => $IndexList,
-					'ImageSRC' => $upload_data['file_name']
-				);
-                $this->anuncio_imagens->adiciona($array_tb_anuncio);
-                $IndexList++;
-                //Image resize High
-
-                // set the resize config
-                $resize_high = array(
-                    // it's something like "/full/path/to/the/image.jpg" maybe
-                    'source_image'   => $upload_data['full_path'], 
-                    // and it's "/full/path/to/the/" + "thumb_" + "image.jpg
-                    // or you can use 'create_thumbs' => true option instead
-                    'new_image'      => $upload_data['file_path'].'high_'.$upload_data['file_name'],
-                    'width'          => 1000,
-                    'height'         => 1000,
-                    'maintain_ratio' => TRUE
-                    );
-
-                // initializing
-                $this->image_lib->initialize($resize_high);
-
-                // do it!
-                if ( ! $this->image_lib->resize())
-                {
-                    // if got fail.
-                    $error['resize'][] = $this->image_lib->display_errors();
-                }
-                else
-                {
-                    // otherwise, put each upload data to an array.
-                    $success[] = $upload_data;
-                }
-
-
-				//Image resize Medium
-
-                // set the resize config
-                $resize_medium = array(
-                    // it's something like "/full/path/to/the/image.jpg" maybe
-                    'source_image'   => $upload_data['full_path'], 
-                    // and it's "/full/path/to/the/" + "thumb_" + "image.jpg
-                    // or you can use 'create_thumbs' => true option instead
-                    'new_image'      => $upload_data['file_path'].'medium_'.$upload_data['file_name'],
-                    'width'          => 600,
-                    'height'         => 600,
-                    'maintain_ratio' => TRUE
-                    );
-
-                // initializing
-                $this->image_lib->initialize($resize_medium);
-
-                // do it!
-                if ( ! $this->image_lib->resize())
-                {
-                    // if got fail.
-                    $error['resize'][] = $this->image_lib->display_errors();
-                }
-                else
-                {
-                    // otherwise, put each upload data to an array.
-                    $success[] = $upload_data;
-                }
-
-                //Image resize thumb
-
-                // set the resize config
-                $resize_thumb = array(
-                    // it's something like "/full/path/to/the/image.jpg" maybe
-                    'source_image'   => $upload_data['full_path'], 
-                    // and it's "/full/path/to/the/" + "thumb_" + "image.jpg
-                    // or you can use 'create_thumbs' => true option instead
-                    'new_image'      => $upload_data['file_path'].'thumb_'.$upload_data['file_name'],
-                    'width'          => 600,
-                    'height'         => 600,
-                    'maintain_ratio' => TRUE
-                    );
-
-                // initializing
-                $this->image_lib->initialize($resize_thumb);
-
-                // do it!
-                if ( ! $this->image_lib->resize())
-                {
-                    // if got fail.
-                    $error['resize'][] = $this->image_lib->display_errors();
-                }
-                else
-                {
-                    // otherwise, put each upload data to an array.
-                    $success[] = $upload_data;
-                }
-
-
-            }
-        }
-
-        // see what we get
-        if(count($error > 0))
-        {
-            $data['error'] = $error;
-        }
-        else
-        {
-            $data['success'] = $upload_data;
-        }
-        
-        $this->load->view('anuncio',$data);
+        redirect('meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
     }
     /*
     function do_upload()
