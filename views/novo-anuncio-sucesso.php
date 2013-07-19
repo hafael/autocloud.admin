@@ -17,7 +17,7 @@
         
         
         <div class="span12">
-          <p class="lead">Concluído! Você terminou de criar o seu anúncio e já pode <a href="http://localhost/autocloud/admin/meusanuncios/anuncio/<?=$this->anuncio->id?>">visualiza-lo</a>.</p>
+          <p class="lead">Concluído! Você terminou de criar o seu anúncio e já pode <a href="<?=base_url()?>admin/meusanuncios/anuncio/<?=$this->anuncio->id?>">visualiza-lo</a>.</p>
           <h3><?=$this->anuncio->Titulo?></h3>
           <p><?=$this->anuncio->Descricao?></p>
           <h4>Fotos</h4>
@@ -28,7 +28,7 @@
             ?>
               <div class="span2 foto">
                 <div class="img-polaroid">
-                  <img src="http://localhost/autocloud/uploads/thumb_<?=$row->ImageSRC?>" >
+                  <img src="<?=base_url()?>uploads/thumb_<?=$row->ImageSRC?>" >
                 </div>
                 <!--
                 <p><?=$row->id?> - <?=$row->IndexList?></p>
@@ -52,7 +52,7 @@
           
           
 
-          <a class="btn btn-primary" href="http://localhost/autocloud/admin/meusanuncios/anuncio/<?=$this->anuncio->id?>">Ver anúncio</a>
+          <a class="btn btn-primary" href="<?=base_url()?>admin/meusanuncios/anuncio/<?=$this->anuncio->id?>">Ver anúncio</a>
         </div>
 
       </div>

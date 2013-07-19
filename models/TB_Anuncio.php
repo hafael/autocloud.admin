@@ -13,6 +13,8 @@
 		var $Descricao;
 		var $ValorVenda;
 		var $TelContato;
+		var $Status;
+		var $Deletado;
 
 		var $nome_tabela;
 		var $data_base_object;
@@ -43,6 +45,8 @@
 				$this->Descricao = $id['Descricao'];
 				$this->ValorVenda = $id['ValorVenda'];
 				$this->TelContato = $id['TelContato'];
+				$this->Status = $id['Status'];
+				$this->Deletado = $id['Deletado'];
 								
 				return true;
 				
@@ -56,6 +60,8 @@
 				$this->Descricao = $id->Descricao;
 				$this->ValorVenda = $id->ValorVenda;
 				$this->TelContato = $id->TelContato;
+				$this->Status = $id->Status;
+				$this->Deletado = $id->Deletado;
 							
 				return true;
 
@@ -83,6 +89,8 @@
 					    $this->Descricao = $row->Descricao;
 					    $this->ValorVenda = $row->ValorVenda;
 					    $this->TelContato = $row->TelContato;
+					    $this->Status = $row->Status;
+					    $this->Deletado = $row->Deletado;
 				    
 					}
 				}
@@ -101,6 +109,7 @@
 
 			//cria consulta
 			$this->data_base_object->where('TB_Anunciante_id = ', $id_anunciante);
+			$this->data_base_object->where('Deletado = ', false);
 			$this->data_base_object->order_by('id', 'desc'); 
 			
 			//$this->data_base_object->select('*');
@@ -145,6 +154,46 @@
 			$this->define((int)$id_anuncio);
 			
 			return (int)$id_anuncio;
+	
+	    }
+
+	    function ativa($id_anuncio){
+    		//load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+			
+			//cria consulta
+			$this->data_base_object->where('id', (int)$id_anuncio);
+			$this->data_base_object->update($this->nome_tabela, array('Status' => true));
+	
+			$this->define((int)$id_anuncio);
+			
+			return true;
+	
+	    }
+	    function desativa($id_anuncio){
+    		//load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+			
+			//cria consulta
+			$this->data_base_object->where('id', (int)$id_anuncio);
+			$this->data_base_object->update($this->nome_tabela, array('Status' => false));
+	
+			$this->define((int)$id_anuncio);
+			
+			return true;
+	
+	    }
+	    function remove($id_anuncio){
+    		//load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+			
+			//cria consulta
+			$this->data_base_object->where('id', (int)$id_anuncio);
+			$this->data_base_object->update($this->nome_tabela, array('Deletado' => true));
+	
+			$this->define((int)$id_anuncio);
+			
+			return true;
 	
 	    }
 		

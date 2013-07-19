@@ -203,6 +203,12 @@
       </div>
     </div>
     <div class="control-group">
+      <label class="control-label" for="descricao">Breve descrição</label>
+      <div class="controls">
+        <textarea class="span12" id="descricao" name="descricao" rows="3"><?=$this->anuncio->Descricao?></textarea>
+      </div>
+    </div>
+    <div class="control-group">
       <div class="controls">
         <input type="hidden" id="fabricanteText" name="fabricanteText" value="" alt="Montadora">
         <input type="hidden" id="modeloText" name="modeloText" value="" alt="Modelo">

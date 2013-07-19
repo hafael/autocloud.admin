@@ -36,7 +36,7 @@ class MeusAnuncios extends CI_Controller {
 		$this->anunciante->define($this->session->userdata('id_login'));
 		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-			redirect('../login/?redirectURL='.current_url(), 'refresh');
+			redirect(base_url().'login/?redirectURL='.current_url(), 'refresh');
 		}
 	}
 
@@ -73,7 +73,7 @@ class MeusAnuncios extends CI_Controller {
 
 				$array_tb_anuncio = array(
 					'Titulo' => $titulo_anuncio,
-					'Descricao' => "Nenhuma descrição definida",
+					'Descricao' => $this->input->post('descricao'),
 					'ValorVenda' => $this->moedas->bra2eua($this->input->post('valor_venda')),
 					'TelContato' => $this->input->post('tel_contato')
 				);
@@ -102,7 +102,7 @@ class MeusAnuncios extends CI_Controller {
 
 				//var_dump($array_tb_anuncio);
 
-				redirect('meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+				redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 			}
 			// View tipo carro
 			$this->load->view('anuncio', $data);
@@ -318,34 +318,36 @@ class MeusAnuncios extends CI_Controller {
 	        }
     	}
         
-        redirect('meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+        redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
     }
-    /*
-    function do_upload()
-	{
-		$this->load->library('upload');
 
-		$config['upload_path'] = '../uploads';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '10000000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+    public function desativa($id_anuncio){
 
-		$this->upload->initialize( $config );
+    	$this->anuncio->define($id_anuncio);
 
-		if ( ! $this->upload->do_upload())
-		{
-			$error = array('error' => $this->upload->display_errors());
+    	$this->anuncio->desativa($this->anuncio->id);
 
-			$this->load->view('anuncio', $error);
-		}
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
+    	redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 
-			$this->load->view('upload_image_success', $data);
-		}
-	}*/
+    }
+    public function ativa($id_anuncio){
+
+    	$this->anuncio->define($id_anuncio);
+
+    	$this->anuncio->ativa($this->anuncio->id);
+
+    	redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+
+    }
+    public function remove($id_anuncio){
+
+    	//$this->anuncio->define($id_anuncio);
+
+    	$this->anuncio->remove($this->anuncio->id);
+
+    	redirect(base_url().'admin/meusanuncios/', 'refresh');
+
+    }
 
 	
 	

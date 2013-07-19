@@ -12,7 +12,19 @@
 
     <div class="container">
       <h1>Meus anúncios</h1>
-      <p class="lead">Gerenciar anúncio</p>
+      <p class="lead">Gerenciar anúncio
+      <?php 
+      if($this->anuncio->Status){
+      ?>
+        <span class="label label-info">Ativo</span>
+      <?php 
+      }else{
+      ?>
+        <span class="label label-important">Inativo</span>
+      <?php 
+      }
+      ?>
+      </p>
 
       
       <div class="row-fluid">
@@ -126,6 +138,9 @@
         overflow: hidden;
         margin-left: 0;
         text-align: center;
+      }
+      .controls .btn-group.pull-right{
+        margin-left: 20px;
       }
     </style>
     <script type="text/javascript">

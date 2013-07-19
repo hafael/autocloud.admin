@@ -30,13 +30,14 @@ class Home extends CI_Controller {
 
 	public function index(){
 		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
+  		// $this->load->helper('url');
+		// $this->load->model('anunciante');
+		// $this->load->model('anunciante_pessoa_fisica','anunciantePF');
+		// $this->anunciante->define($this->session->userdata('id_login'));
+		// $this->anunciantePF->define($this->session->userdata('id_login'));
 
-        $this->load->view('home');
+  		// $this->load->view('home');
+  		redirect(base_url().'admin/meus-anuncios', 'refresh');
 	}
 	public function meusAnuncios(){
 		

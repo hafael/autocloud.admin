@@ -62,7 +62,7 @@ class NovoAnuncio extends CI_Controller {
 				'TipoVeiculo' => $this->input->post('TipoVeiculo'),
 				'TipoAnuncio' => $this->input->post('TipoAnuncio'),
 				'Titulo' => $titulo_anuncio,
-				'Descricao' => "Nenhuma descrição definida",
+				'Descricao' => $this->input->post('descricao'),
 				'ValorVenda' => $this->moedas->bra2eua($this->input->post('valor_venda')),
 				'TelContato' => $this->input->post('tel_contato')
 			);

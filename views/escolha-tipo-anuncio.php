@@ -16,22 +16,22 @@
       <div class="row-fluid">
         <div class="span3">
           <h3>Carro</h3>
-          <img src="http://localhost/autocloud/uploads/img_140x140.png" class="img-polaroid">
+          <img src="<?=base_url()?>uploads/img_140x140.png" class="img-polaroid">
           <p><a class="btn btn-primary btn-large" href="novo-anuncio-carro">Anunciar</a></p>
         </div>
         <div class="span3">
           <h3>Moto</h3>
-          <img src="http://localhost/autocloud/uploads/img_140x140.png" class="img-polaroid">
+          <img src="<?=base_url()?>uploads/img_140x140.png" class="img-polaroid">
           <p><a class="btn btn-primary btn-large" href="novo-anuncio-carro">Anunciar</a></p>
         </div>
         <div class="span3">
           <h3>Caminhão</h3>
-          <img src="http://localhost/autocloud/uploads/img_140x140.png" class="img-polaroid">
+          <img src="<?=base_url()?>uploads/img_140x140.png" class="img-polaroid">
           <p><a class="btn btn-primary btn-large" href="novo-anuncio-carro">Anunciar</a></p>
         </div>
         <div class="span3">
           <h3>Barco/Lancha</h3>
-          <img src="http://localhost/autocloud/uploads/img_140x140.png" class="img-polaroid">
+          <img src="<?=base_url()?>uploads/img_140x140.png" class="img-polaroid">
           <p><a class="btn btn-primary btn-large" href="novo-anuncio-carro">Anunciar</a></p>
         </div>
       </div>

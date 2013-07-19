@@ -1,6 +1,6 @@
 <form id="novo-anuncio" class="form-horizontal" method="POST">
   <div class="span6">
-    <h3>Selecione o veículo</h3>
+    <h3>Veículo</h3>
     <div class="control-group">
       <label class="control-label" for="fabricante">Marca</label>
       <div class="controls">
@@ -41,6 +41,7 @@
         </select>
       </div>
     </div>
+
   </div>
   <div class="span6 pull-right">
     <h3>Dados adicionais</h3>
@@ -104,7 +105,32 @@
       </div>
     </div>
     <div class="control-group">
+      <label class="control-label" for="descricao">Breve descrição</label>
       <div class="controls">
+        <textarea class="span12" id="descricao" name="descricao" rows="3"><?=$this->anuncio->Descricao?></textarea>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <div class="btn-group pull-right">
+          <button class="btn btn-danger btn-large dropdown-toggle" data-toggle="dropdown">Ações <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <?php 
+            if($this->anuncio->Status){
+              ?>
+              <li><a href="<?=base_url()?>admin/meusanuncios/desativa/<?=$this->anuncio->id?>">Desativar anúncio</a></li>
+              <?php
+            }else{
+              ?>
+              <li><a href="<?=base_url()?>admin/meusanuncios/ativa/<?=$this->anuncio->id?>">Ativar anúncio</a></li>
+              <?php
+            }
+            ?>
+            
+            <li class="divider"></li>
+            <li><a href="#removerAnuncio" data-toggle="modal">Remover</a></li>
+          </ul>
+        </div>
         <input type="hidden" id="fabricanteText" name="fabricanteText" value="<?=$this->anuncio_carro->Montadora?>" alt="Montadora">
         <input type="hidden" id="modeloText" name="modeloText" value="<?=$this->anuncio_carro->Modelo?>" alt="Modelo">
         <input type="hidden" id="AnoFabText" name="AnoFabText" value="<?=$this->anuncio_carro->AnoFab?>" alt="Ano Fabricação">
@@ -114,7 +140,24 @@
         <input type="hidden" id="TipoVeiculo" name="TipoVeiculo" value="1" alt="carro">
         <button type="submit" class="btn btn-primary btn-large pull-right">Salvar Edição</button>
       </div>
+      
     </div>
   </div>
   
 </form>
+<!-- Modal Remover -->
+<div id="removerAnuncio" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Remover anúncio</h3>
+  </div>
+  <div class="modal-body">
+    <p>Tem certeza que deseja remover o anúncio:</p>
+    <p><?=$this->anuncio->Titulo?></p>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <a href="<?=base_url()?>admin/meusanuncios/remove/<?=$this->anuncio->id?>" class="btn btn-danger">Remover</a>
+  </div>
+</div>

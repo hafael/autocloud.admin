@@ -33,7 +33,7 @@
               <td><?=$row->Titulo?></td>
               <td>R$ <?=$this->moedas->eua2bra($row->ValorVenda)?></td>
               <?php 
-              if($row->ValorVenda){
+              if($row->Status){
               ?>
                 <td><span class="label label-info">Ativo</span></td>
               <?php 
