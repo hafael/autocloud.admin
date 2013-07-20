@@ -44,9 +44,8 @@ $route['default_controller'] = "home";
 $route['meus-anuncios'] = "meusanuncios";
 $route['novo-anuncio'] = "novoanuncio";
 $route['novo-anuncio-carro'] = "novoanuncio/carro";
-$route['novo-anuncio-carro/fotos'] = "novoanunciocarro/fotos";
-$route['admin/meus-dados'] = "admin/meusdados";
-$route['admin/alterar-senha'] = "admin/alterarsenha";
+$route['meus-dados'] = "meusdados";
+$route['alterar-senha'] = "alterarsenha";
 
 /* Generic Routes*/
 $route['404_override'] = '';

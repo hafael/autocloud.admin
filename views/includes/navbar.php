@@ -9,7 +9,7 @@
       <a class="brand" href="<?=base_url()?>admin">Autocloud Cockpit</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="<?=base_url()?>admin">Dashboard</a></li>
+          <li><a href="<?=base_url()?>admin">Dashboard</a></li>
           <li><a href="<?=base_url()?>admin/meus-anuncios">Meus anúncios</a></li>
           <li><a href="<?=base_url()?>admin/novo-anuncio">Criar novo anúncio</a></li>
           <!--
@@ -21,10 +21,10 @@
           <!--<li><a href="<?=base_url()?>admin/upgrade">Upgrade!</a></li>-->
           <li class="divider-vertical"></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$this->anunciantePF->nome_anunciante?> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$this->anunciantePF->NomeAnunciante?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="<?=base_url()?>admin/meus-dados">Meus dados</a></li>
-              <li><a href="<?=base_url()?>admin/alterar-senha">Alterar senha</a></li>
+              <li><a href="<?=base_url()?>admin/meusdados">Meus dados</a></li>
+              <li><a href="<?=base_url()?>admin/meusdados/senha">Alterar senha</a></li>
               <li class="divider"></li>
               <li><a href="<?=base_url()?>logout">Sair</a></li>
             </ul>

@@ -48,25 +48,69 @@
     </style>
     <script type="text/javascript">
       $("#valor_venda").maskMoney({thousands:'.', decimal:','});
+
+
+
+
       $("#fabricante").select2({
         placeholder: "Aguarde",
         allowClear: true
       });
 
+      $("#estado").select2({
+        placeholder: "Aguarde",
+        allowClear: true
+      });
+
+      
+
       //Carrega Fabricantes
       $.ajax({
         type: 'GET',
-        url: 'http://localhost/autocloud/admin/novoanunciocarro/get_fabricantes/',
+        url: 'http://localhost/autocloud/webservice/carros/montadoras',
         success: function (data){
           $('#fabricante').html('<option></option>');
           $.each(data, function(i, fabricante){
             $('#fabricante').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
           });
           $('#fabricante').select2({
-            placeholder: "Selecine uma marca",
+            placeholder: "Selecione uma marca",
             allowClear: true
           });
           $('#fabricante').select2('enable', true);
+        }
+      });
+
+      //Carrega Estados
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost/autocloud/webservice/estadocidade/estados',
+        success: function (data){
+          $('#estado').append('<option disabled></option>');
+          $.each(data, function(i, fabricante){
+            $('#estado').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
+          });
+          $('#estado').select2({
+            placeholder: "Selecione o estado",
+            allowClear: true
+          });
+          $('#estado').select2('enable', true);
+        }
+      });
+      //Carrega Cidades
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost/autocloud/webservice/estadocidade/estados',
+        success: function (data){
+          $('#cidade').append('<option disabled></option>');
+          $.each(data, function(i, fabricante){
+            $('#cidade').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
+          });
+          $('#cidade').select2({
+            placeholder: "Selecione a cidade",
+            allowClear: true
+          });
+          $('#cidade').select2('enable', true);
         }
       });
 
@@ -77,14 +121,14 @@
         $('#modelo').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_modelos/'+fabricante_id,
+          url: 'http://localhost/autocloud/webservice/carros/modelos/'+fabricante_id,
           success: function (data){
             $('#modelo').html('<option></option>');
             $.each(data, function(i, modelo){
               $('#modelo').append('<option value="'+modelo.id+'">'+modelo.Nome+'</option>');
             });
             $('#modelo').select2({
-              placeholder: "Selecine um modelo",
+              placeholder: "Selecione um modelo",
               allowClear: true
             });
             $('#modelo').select2('enable', true);
@@ -100,14 +144,14 @@
         $('#anoFab').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_ano_fab/'+fabricante_id,
+          url: 'http://localhost/autocloud/webservice/carros/anofabricacao/'+fabricante_id,
           success: function (data){
             $('#anoFab').html('<option></option>');
             $.each(data, function(i, modelo){
               $('#anoFab').append('<option value="'+modelo.id+'">'+modelo.Ano+'</option>');
             });
             $('#anoFab').select2({
-              placeholder: "Selecine um modelo",
+              placeholder: "Selecione um modelo",
               allowClear: true
             });
             $('#anoFab').select2('enable', true);
@@ -123,14 +167,14 @@
         $('#anoMod').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_ano_mod/'+fabricante_id,
+          url: 'http://localhost/autocloud/webservice/carros/anomodelo/'+fabricante_id,
           success: function (data){
             $('#anoMod').html('<option></option>');
             $.each(data, function(i, modelo){
               $('#anoMod').append('<option value="'+modelo.id+'">'+modelo.Ano+'</option>');
             });
             $('#anoMod').select2({
-              placeholder: "Selecine um modelo",
+              placeholder: "Selecione um modelo",
               allowClear: true
             });
             $('#anoMod').select2('enable', true);
@@ -146,14 +190,14 @@
         $('#versao').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/admin/novoanunciocarro/get_versao/'+fabricante_id,
+          url: 'http://localhost/autocloud/webservice/carros/versao/'+fabricante_id,
           success: function (data){
             $('#versao').html('<option></option>');
             $.each(data, function(i, modelo){
               $('#versao').append('<option value="'+modelo.id+'">'+modelo.Nome+'</option>');
             });
             $('#versao').select2({
-              placeholder: "Selecine um modelo",
+              placeholder: "Selecione um modelo",
               allowClear: true
             });
             $('#versao').select2('enable', true);
@@ -168,9 +212,38 @@
           $('#versaoText').val($(this).text());
         });
       });
+      $('#estado').change(function(){
+        var fabricante_id = $(this).val();
+        $('#cidade').empty();
+        $('#cidade').append('<option value="false">Aguarde</option>');
+        $.ajax({
+          type: 'GET',
+          url: 'http://localhost/autocloud/webservice/estadocidade/cidades/'+fabricante_id,
+          success: function (data){
+            $('#cidade').html('<option></option>');
+            $.each(data, function(i, modelo){
+              $('#cidade').append('<option value="'+modelo.id+'">'+modelo.Nome+'</option>');
+            });
+            $('#cidade').select2({
+              placeholder: "Selecione a cidade",
+              allowClear: true
+            });
+            $('#cidade').select2('enable', true);
+            $('#estado option:selected').each(function () {
+              $('#EstadoText').val($(this).text());
+              $('#CidadeText').val('');
+            });
+          }
+        });
+      });
+      $('#cidade').change(function(){
+        $('#cidade option:selected').each(function () {
+          $('#CidadeText').val($(this).text());
+        });
+      });
 
       $("#modelo").select2({
-        placeholder: "Selecine um modelo",
+        placeholder: "Selecione um modelo",
         allowClear: true
       });
       $("#anoFab").select2({
@@ -183,6 +256,14 @@
       });
       $("#versao").select2({
         placeholder: "Versão do veículo",
+        allowClear: true
+      });
+      $("#estado").select2({
+        placeholder: "Selecione o estado",
+        allowClear: true
+      });
+      $("#cidade").select2({
+        placeholder: "Selecione a cidade",
         allowClear: true
       });
     </script>

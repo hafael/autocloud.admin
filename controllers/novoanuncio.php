@@ -28,14 +28,14 @@ class NovoAnuncio extends CI_Controller {
 		$this->load->library('upload');
         $this->load->library('image_lib');
         $this->load->library('moedas');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
+		$this->load->model('TB_Anunciante','anunciante');
+        $this->load->model('TB_AnunciantePessoaFisica','anunciantePF');
 		$this->load->model('TB_Anuncio','anuncio');
 		$this->load->model('TB_ImagensAnuncio','anuncio_imagens');
 		$this->anunciante->define($this->session->userdata('id_login'));
 		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-			redirect('../login/?redirectURL='.current_url(), 'refresh');
+			redirect(base_url().'login/?redirectURL='.current_url(), 'refresh');
 		}
 	}
 
@@ -64,7 +64,11 @@ class NovoAnuncio extends CI_Controller {
 				'Titulo' => $titulo_anuncio,
 				'Descricao' => $this->input->post('descricao'),
 				'ValorVenda' => $this->moedas->bra2eua($this->input->post('valor_venda')),
-				'TelContato' => $this->input->post('tel_contato')
+				'TelContato' => $this->input->post('tel_contato'),
+                'TB_Estado_id' => $this->input->post('estado'),
+                'TB_Estado_Nome' => $this->input->post('EstadoText'),
+                'TB_Cidade_id' => $this->input->post('cidade'),
+                'TB_Cidade_Nome' => $this->input->post('CidadeText')
 			);
 			$this->anuncio->adiciona($array_tb_anuncio);
 

@@ -110,6 +110,24 @@
         <textarea class="span12" id="descricao" name="descricao" rows="3"><?=$this->anuncio->Descricao?></textarea>
       </div>
     </div>
+    <h3>Localização</h3>
+    <p class="lead">Informe a localização do veículo</p>
+    <div class="control-group">
+      <label class="control-label" for="estado">Estado</label>
+      <div class="controls">
+        <select id="estado" name="estado">
+          <option value="<?=$this->anunciante->TB_Estado_id?>"><?=$this->anunciante->TB_Estado_Nome?></option>
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="cidade">Cidade</label>
+      <div class="controls">
+        <select id="cidade" name="cidade">
+          <option value="<?=$this->anunciante->TB_Cidade_id?>"><?=$this->anunciante->TB_Cidade_Nome?></option>
+        </select>
+      </div>
+    </div>
     <div class="control-group">
       <div class="controls">
         <div class="btn-group pull-right">
@@ -136,6 +154,8 @@
         <input type="hidden" id="AnoFabText" name="AnoFabText" value="<?=$this->anuncio_carro->AnoFab?>" alt="Ano Fabricação">
         <input type="hidden" id="AnoModText" name="AnoModText" value="<?=$this->anuncio_carro->AnoMod?>" alt="Ano Modelo">
         <input type="hidden" id="versaoText" name="versaoText" value="<?=$this->anuncio_carro->Versao?>" alt="Versão">
+        <input type="hidden" id="EstadoText" name="EstadoText" value="<?=$this->anunciante->TB_Estado_Nome?>" alt="Estado">
+        <input type="hidden" id="CidadeText" name="CidadeText" value="<?=$this->anunciante->TB_Cidade_Nome?>" alt="Cidade">
         <input type="hidden" id="TipoAnuncio" name="TipoAnuncio" value="1" alt="Gratuito">
         <input type="hidden" id="TipoVeiculo" name="TipoVeiculo" value="1" alt="carro">
         <button type="submit" class="btn btn-primary btn-large pull-right">Salvar Edição</button>

@@ -6,7 +6,8 @@
 
 		/* Campos */
 		var $id;
-		var $nome;
+		var $TB_Anunciante_id;
+		var $NomeAnunciante;
 
 		var $nome_tabela;
 		var $data_base_object;
@@ -30,14 +31,16 @@
 	    	if(is_array($id)){
 				
 				$this->id = $id['id'];
-				$this->nome = $id['Nome'];
+				$this->TB_Anunciante_id = $id['TB_Anunciante_id'];
+				$this->NomeAnunciante = $id['NomeAnunciante'];
 								
 				return true;
 				
 			}else if(is_object($id)){
 				
 				$this->id = $id->id;
-				$this->nome = $id->Nome;
+				$this->TB_Anunciante_id = $id->TB_Anunciante_id;
+				$this->NomeAnunciante = $id->NomeAnunciante;
 							
 				return true;
 
@@ -47,7 +50,7 @@
 				$this->data_base_object = $this->load->database($this->config_database,true);
 				
 				//cria consultas
-				$query = $this->data_base_object->get_where($this->nome_tabela, array('id' => $id));
+				$query = $this->data_base_object->get_where($this->nome_tabela, array('TB_Anunciante_id' => $id));
 				
 				foreach ($query->result() as $row){
 				    
@@ -58,7 +61,8 @@
 					}else{
 					
 						$this->id = $row->id;
-					    $this->nome = $row->Nome;
+					    $this->TB_Anunciante_id = $row->TB_Anunciante_id;
+					    $this->NomeAnunciante = $row->NomeAnunciante;
 				    
 					}
 				}
@@ -71,22 +75,6 @@
 	    }
 
 
-	    function lista($id_anunciante) {
-	        //load database
-			$this->data_base_object = $this->load->database($this->config_database,true);
-
-			//cria consulta
-			$this->data_base_object->where('TB_Anunciante_id = ', $id_anunciante);
-
-			//executa query
-			$query = $this->data_base_object->get_where($this->nome_tabela);
-
-			foreach ($query->result() as $row){
-				$array_objetos[] = $row;
-			}
-			return $array_objetos;
-	    }
-
 	    function adiciona($array_dados){
     		//load database
 			$this->data_base_object = $this->load->database($this->config_database,true);
@@ -98,6 +86,23 @@
 			$this->define((int)$this->data_base_object->insert_id());
 			
 			return (int)$this->data_base_object->insert_id();
+	
+	    }
+
+	    function edita($id_anunciante, $array_dados){
+    		//load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+			
+			//cria consulta
+			$this->data_base_object->where('TB_Anunciante_id', (int)$id_anunciante);
+			$this->data_base_object->update($this->nome_tabela, $array_dados);
+
+			//$this->data_base_object->update($this->nome_tabela, $array_dados);
+			
+			//Define o objeto com o last id do banco	
+			$this->define((int)$id_anunciante);
+			
+			return (int)$id_anunciante;
 	
 	    }
 		
