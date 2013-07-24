@@ -103,6 +103,61 @@ class NovoAnuncio extends CI_Controller {
 		$this->load->view('novo-anuncio', $data);
 
 	}
+    public function moto(){
+
+        $this->load->model('TB_AnuncioCarro','anuncio_moto');
+        $data['TipoVeiculo'] = 2;
+
+        if($this->input->post('TipoVeiculo')=="2"){
+
+            $titulo_anuncio = $this->input->post('fabricanteText')
+                            ." ".$this->input->post('modeloText')
+                            ." ".$this->input->post('versaoText')
+                            ." ".$this->input->post('combustivel')
+                            ." ".$this->input->post('AnoFabText')
+                            ."/".$this->input->post('AnoModText');
+
+            $array_tb_anuncio = array(
+                'TB_Anunciante_id' => $this->anunciante->id,
+                'TipoVeiculo' => $this->input->post('TipoVeiculo'),
+                'TipoAnuncio' => $this->input->post('TipoAnuncio'),
+                'Titulo' => $titulo_anuncio,
+                'Descricao' => $this->input->post('descricao'),
+                'ValorVenda' => $this->moedas->bra2eua($this->input->post('valor_venda')),
+                'TelContato' => $this->input->post('tel_contato'),
+                'TB_Estado_id' => $this->input->post('estado'),
+                'TB_Estado_Nome' => $this->input->post('EstadoText'),
+                'TB_Cidade_id' => $this->input->post('cidade'),
+                'TB_Cidade_Nome' => $this->input->post('CidadeText')
+            );
+            $this->anuncio->adiciona($array_tb_anuncio);
+
+            $array_tb_anuncio_moto = array(
+                'TB_Anuncio_id' => $this->anuncio->id,
+                'Montadora' => $this->input->post('fabricanteText'),
+                'Modelo' => $this->input->post('modeloText'),
+                'AnoFab' => $this->input->post('AnoFabText'),
+                'AnoMod' => $this->input->post('AnoModText'),
+                'Versao' => $this->input->post('versaoText'),
+                'TB_FabricanteVeiculo_id' => $this->input->post('fabricante'),
+                'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => $this->input->post('modelo'),
+                'TB_AnoFabricacaoVeiculo_TB_ModeloVeiculo_id' => $this->input->post('anoFab'),
+                'TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id' => $this->input->post('anoMod'),
+                'TB_VersaoVeiculo_id' => $this->input->post('versao'),
+                'Abs' => (bool)$this->input->post('abs'),
+                'Combustivel' => $this->input->post('combustivel')
+            );
+            $this->anuncio_moto->adiciona($array_tb_anuncio_moto);
+
+            //$this->anuncio->adiciona($array_insert);
+
+            redirect('novoanuncio/fotos/'.$this->anuncio->id, 'refresh');
+        }
+
+        // View tipo carro
+        $this->load->view('novo-anuncio', $data);
+
+    }
 
 	public function fotos($id_anuncio){
 

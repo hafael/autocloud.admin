@@ -140,34 +140,55 @@
         </select>
       </div>
     </div>
+    <h3>Localização</h3>
+    <p class="lead">Informe a localização do veículo</p>
+    <div class="control-group">
+      <label class="control-label" for="estado">Estado</label>
+      <div class="controls">
+        <select id="estado" name="estado">
+          <option value="<?=$this->anunciante->TB_Estado_id?>"><?=$this->anunciante->TB_Estado_Nome?></option>
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="cidade">Cidade</label>
+      <div class="controls">
+        <select id="cidade" name="cidade">
+          <option value="<?=$this->anunciante->TB_Cidade_id?>"><?=$this->anunciante->TB_Cidade_Nome?></option>
+        </select>
+      </div>
+    </div>
   </div>
   <div class="span6 pull-right">
     <h3>Dados adicionais</h3>
     <div class="control-group">
-      <label class="checkbox inline">
-        <input type="checkbox" id="ar_condicionado" name="ar_condicionado" value="1">
-        Ar
-      </label>
-      <label class="checkbox inline">
-        <input type="checkbox" id="vidro_eletrico" name="vidro_eletrico" value="1">
-        Vidro
-      </label>
-      <label class="checkbox inline">
-        <input type="checkbox" id="direcao_hidraulica" name="direcao_hidraulica" value="1">
-        Direção
-      </label>
-      <label class="checkbox inline">
-        <input type="checkbox" id="air_bag" name="air_bag" value="1">
-        Air bag
-      </label>
-      <label class="checkbox inline">
-        <input type="checkbox" id="gas_natural" name="gas_natural" value="1">
-        GNV
-      </label>
-      <label class="checkbox inline">
-        <input type="checkbox" id="blindado" name="blindado" value="1">
-        Blindado
-      </label>
+      <label class="control-label" for="opcionais">Opcionais</label>
+      <div class="controls">
+        <label class="checkbox inline">
+          <input type="checkbox" id="ar_condicionado" name="ar_condicionado" value="1">
+          Ar
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" id="vidro_eletrico" name="vidro_eletrico" value="1">
+          Vidro
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" id="direcao_hidraulica" name="direcao_hidraulica" value="1">
+          Direção
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" id="air_bag" name="air_bag" value="1">
+          Air bag
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" id="gas_natural" name="gas_natural" value="1">
+          GNV
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" id="blindado" name="blindado" value="1">
+          Blindado
+        </label>
+      </div>
     </div>
     <div class="control-group">
       <label class="control-label">Combustível</label>
@@ -208,24 +229,7 @@
         <textarea class="span12" id="descricao" name="descricao" rows="3"><?=$this->anuncio->Descricao?></textarea>
       </div>
     </div>
-    <h3>Localização</h3>
-    <p class="lead">Informe a localização do veículo</p>
-    <div class="control-group">
-      <label class="control-label" for="estado">Estado</label>
-      <div class="controls">
-        <select id="estado" name="estado">
-          <option value="<?=$this->anunciante->TB_Estado_id?>"><?=$this->anunciante->TB_Estado_Nome?></option>
-        </select>
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="cidade">Cidade</label>
-      <div class="controls">
-        <select id="cidade" name="cidade">
-          <option value="<?=$this->anunciante->TB_Cidade_id?>"><?=$this->anunciante->TB_Cidade_Nome?></option>
-        </select>
-      </div>
-    </div>
+    
     <div class="control-group">
       <div class="controls">
         <input type="hidden" id="fabricanteText" name="fabricanteText" value="" alt="Montadora">

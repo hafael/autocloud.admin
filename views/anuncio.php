@@ -36,10 +36,7 @@
             include 'anuncio/carro/gerenciar.php';
             break;
           case 2:
-            echo "moto";
-            break;
-          case 3:
-            echo "caminhao";
+            include 'anuncio/moto/gerenciar.php';
             break;
         }
 
@@ -144,6 +141,10 @@
       }
     </style>
     <script type="text/javascript">
+
+      var endpoint = 'http://www.autocloud.com.br/webservice/';
+      //var endpoint = 'http://localhost/autocloud/webservice/';
+
       $(document).ready(function(){
         $('input[type=file]').bootstrapFileInput();
         $("#valor_venda").maskMoney({thousands:'.', decimal:','});
@@ -159,7 +160,7 @@
       //Carrega Fabricantes
       $.ajax({
         type: 'GET',
-        url: 'http://localhost/autocloud/webservice/carros/montadoras',
+        url: endpoint+'carros/montadoras',
         success: function (data){
           $('#fabricante').append('<option disabled></option>');
           $.each(data, function(i, fabricante){
@@ -176,7 +177,7 @@
       //Carrega Estados
       $.ajax({
         type: 'GET',
-        url: 'http://localhost/autocloud/webservice/estadocidade/estados',
+        url: endpoint+'estadocidade/estados',
         success: function (data){
           $('#estado').append('<option disabled></option>');
           $.each(data, function(i, fabricante){
@@ -192,7 +193,7 @@
       //Carrega Cidades
       $.ajax({
         type: 'GET',
-        url: 'http://localhost/autocloud/webservice/estadocidade/estados',
+        url: endpoint+'estadocidade/estados',
         success: function (data){
           $('#cidade').append('<option disabled></option>');
           $.each(data, function(i, fabricante){
@@ -211,7 +212,7 @@
         $('#modelo').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/webservice/carros/modelos/'+fabricante_id,
+          url: endpoint+'carros/modelos/'+fabricante_id,
           success: function (data){
             $('#modelo').html('<option></option>');
             $.each(data, function(i, modelo){
@@ -235,7 +236,7 @@
         $('#anoFab').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/webservice/carros/anofabricacao/'+fabricante_id,
+          url: endpoint+'carros/anofabricacao/'+fabricante_id,
           success: function (data){
             $('#anoFab').html('<option></option>');
             $.each(data, function(i, modelo){
@@ -258,7 +259,7 @@
         $('#anoMod').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/webservice/carros/anomodelo/'+fabricante_id,
+          url: endpoint+'carros/anomodelo/'+fabricante_id,
           success: function (data){
             $('#anoMod').html('<option></option>');
             $.each(data, function(i, modelo){
@@ -281,7 +282,7 @@
         $('#versao').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/webservice/carros/versao/'+fabricante_id,
+          url: endpoint+'carros/versao/'+fabricante_id,
           success: function (data){
             $('#versao').html('<option></option>');
             $.each(data, function(i, modelo){
@@ -309,7 +310,7 @@
         $('#cidade').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: 'http://localhost/autocloud/webservice/estadocidade/cidades/'+fabricante_id,
+          url: endpoint+'estadocidade/cidades/'+fabricante_id,
           success: function (data){
             $('#cidade').html('<option></option>');
             $.each(data, function(i, modelo){

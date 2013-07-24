@@ -44,6 +44,7 @@ $route['default_controller'] = "home";
 $route['meus-anuncios'] = "meusanuncios";
 $route['novo-anuncio'] = "novoanuncio";
 $route['novo-anuncio-carro'] = "novoanuncio/carro";
+$route['novo-anuncio-moto'] = "novoanuncio/moto";
 $route['meus-dados'] = "meusdados";
 $route['alterar-senha'] = "alterarsenha";
 

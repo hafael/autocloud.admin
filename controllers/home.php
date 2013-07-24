@@ -21,8 +21,20 @@ class Home extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$data = array();
-		$this->load->model('anunciante');
 		$this->load->helper('url');
+		$this->load->helper('form');
+		$this->load->helper('path');
+		$this->load->helper('directory');
+		$this->load->library('upload');
+        $this->load->library('image_lib');
+        $this->load->library('moedas');
+		$this->load->model('TB_Anunciante','anunciante');
+		$this->load->model('TB_AnunciantePessoaFisica','anunciantePF');
+		$this->load->model('TB_Anuncio','anuncio');
+		$this->load->model('TB_AnuncioCarro','anuncio_carro');
+		$this->load->model('TB_ImagensAnuncio','anuncio_imagens');
+		$this->anunciante->define($this->session->userdata('id_login'));
+		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
 			redirect(base_url().'login/?redirectURL='.current_url(), 'refresh');
 		}
@@ -30,91 +42,9 @@ class Home extends CI_Controller {
 
 	public function index(){
 		
-  		// $this->load->helper('url');
-		// $this->load->model('anunciante');
-		// $this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		// $this->anunciante->define($this->session->userdata('id_login'));
-		// $this->anunciantePF->define($this->session->userdata('id_login'));
-
-  		// $this->load->view('home');
   		redirect(base_url().'admin/meus-anuncios', 'refresh');
 	}
-	public function meusAnuncios(){
-		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
-        $this->load->view('home');
-	}
-	public function novoAnuncio(){
-		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
-        $this->load->view('home');
-	}
-	public function perguntas(){
-		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
-        $this->load->view('home');
-	}
-	public function relatorios(){
-		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
-        $this->load->view('home');
-	}
-	public function upgrade(){
-		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
-        $this->load->view('home');
-	}
-	public function meusDados(){
-		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
-        $this->load->view('home');
-	}
-	public function alterarSenha(){
-		
-        $this->load->helper('url');
-		$this->load->model('anunciante');
-		$this->load->model('anunciante_pessoa_fisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-
-        $this->load->view('home');
-	}
-
-	public function logout(){
-	   $this->session->unset_userdata('logged');
-	   $this->session->unset_userdata('id_login');
-	   redirect('login', 'refresh');
-	}
+	
 
 	
 	
