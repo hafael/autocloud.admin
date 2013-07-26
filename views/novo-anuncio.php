@@ -53,8 +53,6 @@
       $("#valor_venda").maskMoney({thousands:'.', decimal:','});
 
 
-
-
       $("#fabricante").select2({
         placeholder: "Aguarde",
         allowClear: true
@@ -74,7 +72,7 @@
         success: function (data){
           $('#fabricante').html('<option></option>');
           $.each(data, function(i, fabricante){
-            $('#fabricante').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
+            $('#fabricante').append('<option value="'+fabricante.Chave+'">'+fabricante.Nome+'</option>');
           });
           $('#fabricante').select2({
             placeholder: "Selecione uma marca",
@@ -124,11 +122,11 @@
         $('#modelo').append('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: endpoint+'carros/modelos/'+fabricante_id,
+          url: endpoint+'carros/modelos/'+tipo_veiculo+'/'+fabricante_id,
           success: function (data){
             $('#modelo').html('<option></option>');
             $.each(data, function(i, modelo){
-              $('#modelo').append('<option value="'+modelo.id+'">'+modelo.Nome+'</option>');
+              $('#modelo').append('<option value="'+modelo.Chave+'">'+modelo.Nome+'</option>');
             });
             $('#modelo').select2({
               placeholder: "Selecione um modelo",
@@ -141,6 +139,7 @@
           }
         });
       });
+      /*
       $('#modelo').change(function(){
         var fabricante_id = $(this).val();
         $('#anoFab').empty();
@@ -187,6 +186,7 @@
           }
         });
       });
+
       $('#anoMod').change(function(){
         var fabricante_id = $(this).val();
         $('#versao').empty();
@@ -213,6 +213,34 @@
       $('#versao').change(function(){
         $('#versao option:selected').each(function () {
           $('#versaoText').val($(this).text());
+        });
+      });
+      */
+      $('#modelo').change(function(){
+        $('#modelo option:selected').each(function () {
+          $('#modeloText').val($(this).text());
+        });
+      });
+      
+      $('#anoFab').change(function(){
+        
+        var ano_fab = parseInt($(this).val());
+        var ano_mod = ano_fab+1;
+        $('#anoMod').empty();
+        $('#anoMod').append('<option value="'+ano_fab+'">'+ano_fab+'</option>');
+        $('#anoMod').append('<option value="'+ano_mod+'">'+ano_mod+'</option>');
+        $("#anoMod").select2({
+          placeholder: "Ano do modelo",
+          allowClear: true
+        });
+        $('#anoMod option:selected').each(function () {
+          $('#AnoFabText').val($(this).text());
+        });
+        $('#anoMod').select2('enable', true);
+      });
+      $('#anoMod').change(function(){
+        $('#anoMod option:selected').each(function () {
+          $('#AnoModText').val($(this).text());
         });
       });
       $('#estado').change(function(){
@@ -269,7 +297,13 @@
         placeholder: "Selecione a cidade",
         allowClear: true
       });
+
+
+      
+
     </script>
+
+
 
 
   </body>

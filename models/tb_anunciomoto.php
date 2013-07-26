@@ -1,6 +1,6 @@
 <?php 
 
-	class TB_AnuncioCarro extends CI_Model {
+	class TB_AnuncioMoto extends CI_Model {
 
 		
 
@@ -26,7 +26,7 @@
 		var $config_database;
 		var $array_objetos;
 
-		function TB_AnuncioCarro($config_database = "autocloudv2"){
+		function TB_AnuncioMoto($config_database = "autocloudv2"){
 	    	
 	        parent::__construct();
 

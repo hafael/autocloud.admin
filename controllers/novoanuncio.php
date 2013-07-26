@@ -52,10 +52,10 @@ class NovoAnuncio extends CI_Controller {
 
 			$titulo_anuncio = $this->input->post('fabricanteText')
 							." ".$this->input->post('modeloText')
-							." ".$this->input->post('versaoText')
+							." ".$this->input->post('versao')
 							." ".$this->input->post('combustivel')
-							." ".$this->input->post('AnoFabText')
-							."/".$this->input->post('AnoModText');
+							." ".$this->input->post('anoFab')
+							."/".$this->input->post('anoMod');
 
 			$array_tb_anuncio = array(
 				'TB_Anunciante_id' => $this->anunciante->id,
@@ -71,7 +71,7 @@ class NovoAnuncio extends CI_Controller {
                 'TB_Cidade_Nome' => $this->input->post('CidadeText')
 			);
 			$this->anuncio->adiciona($array_tb_anuncio);
-
+            /*
 			$array_tb_anuncio_carro = array(
 				'TB_Anuncio_id' => $this->anuncio->id,
 				'Montadora' => $this->input->post('fabricanteText'),
@@ -92,6 +92,25 @@ class NovoAnuncio extends CI_Controller {
 				'Blindado' => (bool)$this->input->post('blindado'),
 				'Combustivel' => $this->input->post('combustivel')
 			);
+            */
+            $array_tb_anuncio_carro = array(
+                'TB_Anuncio_id' => $this->anuncio->id,
+                'Montadora' => $this->input->post('fabricanteText'),
+                'Modelo' => $this->input->post('modeloText'),
+                'AnoFab' => (int)$this->input->post('anoFab'),
+                'AnoMod' => (int)$this->input->post('anoMod'),
+                'Versao' => $this->input->post('versao'),
+                'TB_FabricanteVeiculo_id' => $this->input->post('fabricante'),
+                'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => $this->input->post('modelo'),
+                'ArCondicionado' => (bool)$this->input->post('ar_condicionado'),
+                'VidroEletrico' => (bool)$this->input->post('vidro_eletrico'),
+                'DirecaoHidraulica' => (bool)$this->input->post('direcao_hidraulica'),
+                'AirBag' => (bool)$this->input->post('air_bag'),
+                'GasNatural' => (bool)$this->input->post('gas_natural'),
+                'Blindado' => (bool)$this->input->post('blindado'),
+                'Combustivel' => $this->input->post('combustivel'),
+                'Transmissao' => $this->input->post('transmissao')
+            );
 			$this->anuncio_carro->adiciona($array_tb_anuncio_carro);
 
 			//$this->anuncio->adiciona($array_insert);
@@ -105,14 +124,13 @@ class NovoAnuncio extends CI_Controller {
 	}
     public function moto(){
 
-        $this->load->model('TB_AnuncioCarro','anuncio_moto');
+        $this->load->model('TB_AnuncioMoto','anuncio_moto');
         $data['TipoVeiculo'] = 2;
 
         if($this->input->post('TipoVeiculo')=="2"){
 
             $titulo_anuncio = $this->input->post('fabricanteText')
                             ." ".$this->input->post('modeloText')
-                            ." ".$this->input->post('versaoText')
                             ." ".$this->input->post('combustivel')
                             ." ".$this->input->post('AnoFabText')
                             ."/".$this->input->post('AnoModText');
@@ -136,14 +154,10 @@ class NovoAnuncio extends CI_Controller {
                 'TB_Anuncio_id' => $this->anuncio->id,
                 'Montadora' => $this->input->post('fabricanteText'),
                 'Modelo' => $this->input->post('modeloText'),
-                'AnoFab' => $this->input->post('AnoFabText'),
-                'AnoMod' => $this->input->post('AnoModText'),
-                'Versao' => $this->input->post('versaoText'),
+                'AnoFab' => (int)$this->input->post('anoFab'),
+                'AnoMod' => (int)$this->input->post('anoMod'),
                 'TB_FabricanteVeiculo_id' => $this->input->post('fabricante'),
                 'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => $this->input->post('modelo'),
-                'TB_AnoFabricacaoVeiculo_TB_ModeloVeiculo_id' => $this->input->post('anoFab'),
-                'TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id' => $this->input->post('anoMod'),
-                'TB_VersaoVeiculo_id' => $this->input->post('versao'),
                 'Abs' => (bool)$this->input->post('abs'),
                 'Combustivel' => $this->input->post('combustivel')
             );

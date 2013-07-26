@@ -7,7 +7,8 @@
 		/* Campos */
 		var $id;
 		var $TipoVeiculo;
-		var $nome;
+		var $Chave;
+		var $Nome;
 
 		var $nome_tabela;
 		var $data_base_object;
@@ -31,7 +32,8 @@
 				
 				$this->id = $id['id'];
 				$this->TipoVeiculo = $id['TipoVeiculo'];
-				$this->nome = $id['Nome'];
+				$this->Chave = $id['Chave'];
+				$this->Nome = $id['Nome'];
 								
 				return true;
 				
@@ -61,7 +63,8 @@
 					
 						$this->id = $row->id;
 						$this->TipoVeiculo = $row->TipoVeiculo;
-					    $this->nome = $row->Nome;
+					    $this->Chave = $row->Chave;
+					    $this->Nome = $row->Nome;
 				    
 					}
 				}
@@ -74,13 +77,15 @@
 	    }
 	    
 
-	    # VERIFICA SE O USUÁRIO ESTÁ LOGADO
-	    function lista() {
+	    function lista($tipo_veiculo) {
 	        //load database
 			$this->data_base_object = $this->load->database($this->config_database,true);
 
+			//cria consulta
+			$this->data_base_object->where('TipoVeiculo = ', $tipo_veiculo);
+
 			//executa query
-			$query = $this->data_base_object->get($this->nome_tabela); 
+			$query = $this->data_base_object->get_where($this->nome_tabela); 
 
 			foreach ($query->result() as $row){
 				$array_objetos[] = $row;

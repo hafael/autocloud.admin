@@ -19,6 +19,7 @@
 		var $TB_VersaoVeiculo_id;
 		
 		var $Combustivel;
+		var $Transmissao;
 		var $ArCondicionado;
 		var $VidroEletrico;
 		var $DirecaoHidraulica;
@@ -60,6 +61,7 @@
 				$this->TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id = $id['TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id'];
 				$this->TB_VersaoVeiculo_id = $id['TB_VersaoVeiculo_id'];
 				$this->Combustivel = $id['Combustivel'];
+				$this->Transmissao = $id['Transmissao'];
 				$this->ArCondicionado = $id['ArCondicionado'];
 				$this->VidroEletrico = $id['VidroEletrico'];
 				$this->DirecaoHidraulica = $id['DirecaoHidraulica'];
@@ -87,6 +89,7 @@
 				$this->TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id = $id->TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id;
 				$this->TB_VersaoVeiculo_id = $id->TB_VersaoVeiculo_id;
 				$this->Combustivel = $id->Combustivel;
+				$this->Transmissao = $id->Transmissao;
 				$this->ArCondicionado = $id->ArCondicionado;
 				$this->VidroEletrico = $id->VidroEletrico;
 				$this->DirecaoHidraulica = $id->DirecaoHidraulica;
@@ -125,6 +128,7 @@
 					    $this->TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id = $row->TB_AnoModeloVeiculo_TB_AnoFabricacaoVeiculo_id;
 					    $this->TB_VersaoVeiculo_id = $row->TB_VersaoVeiculo_id;
 				    	$this->Combustivel = $row->Combustivel;
+				    	$this->Transmissao = $row->Transmissao;
 				    	$this->ArCondicionado = $row->ArCondicionado;
 				    	$this->VidroEletrico = $row->VidroEletrico;
 				    	$this->DirecaoHidraulica = $row->DirecaoHidraulica;

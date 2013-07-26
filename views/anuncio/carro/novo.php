@@ -6,105 +6,6 @@
       <div class="controls">
         <select id="fabricante" name="fabricante" disabled>
           <option>Aguarde</option>
-          <!--
-          <optgroup label="Marcas nacionais">
-            <option value="54">CHEVROLET</option>
-            <option value="20">FIAT</option>
-            <option value="52">VOLKSWAGEN</option>
-            <option value="2">FORD</option>
-            <option value="55">HONDA</option>
-            <option value="59">HYUNDAI</option>
-            <option value="4">TOYOTA</option>
-            <option value="3">PEUGEOT</option>
-            <option value="43">RENAULT</option>
-            <option value="56">CITROËN</option>
-            <option value="63">NISSAN</option>
-          </optgroup>
-            <optgroup label="Outras marcas">
-            <option value="138">ACURA</option>
-            <option value="7">AUDI</option>
-            <option value="10">BMW</option>
-            <option value="14">CHRYSLER</option>
-            <option value="57">LAND ROVER</option>
-            <option value="160">MAHINDRA</option>
-            <option value="61">MERCEDES BENZ</option>
-            <option value="62">MITSUBISHI</option>
-            <option value="65">VOLVO</option>
-            <option value="138">ACURA</option>
-            <option value="5">AGRALE</option>
-            <option value="69">ALFA ROMEO</option>
-            <option value="71">AMGC</option>
-            <option value="72">ASIA MOTORS</option>
-            <option value="180">ASTON MARTIN</option>
-            <option value="9">BENTLEY</option>
-            <option value="73">BUGGY</option>
-            <option value="74">BUICK</option>
-            <option value="12">CADILLAC</option>
-            <option value="75">CBT</option>
-            <option value="13">CHAMONIX</option>
-            <option value="155">CHANA MOTORS</option>
-            <option value="167">CHERY</option>
-            <option value="15">CROSS LANDER</option>
-            <option value="76">DAEWOO</option>
-            <option value="16">DAIHATSU</option>
-            <option value="17">DODGE</option>
-            <option value="165">Effa Motors</option>
-            <option value="18">ENGESA</option>
-            <option value="181">ESPECIAIS/RARIDADES</option>
-            <option value="58">FERRARI</option>
-            <option value="80">GMC</option>
-            <option value="23">GURGEL</option>
-            <option value="185">HAFEI MOTORS</option>
-            <option value="55">HONDA</option>
-            <option value="24">HUMMER</option>
-            <option value="59">HYUNDAI</option>
-            <option value="25">INFINITI</option>
-            <option value="26">ISUZU</option>
-            <option value="82">IVECO</option>
-            <option value="188">JAC</option>
-            <option value="27">JAGUAR</option>
-            <option value="68">JEEP</option>
-            <option value="186">JINBEI MOTORS</option>
-            <option value="28">JPX</option>
-            <option value="60">KIA MOTORS</option>
-            <option value="29">LADA</option>
-            <option value="152">LAMBORGHINI</option>
-            <option value="57">LAND ROVER</option>
-            <option value="31">LEXUS</option>
-            <option value="184">LIFAN MOTORS</option>
-            <option value="83">LINCOLN</option>
-            <option value="32">LOBINI</option>
-            <option value="84">LOTUS</option>
-            <option value="160">MAHINDRA</option>
-            <option value="33">MARCOPOLO</option>
-            <option value="34">MASERATI</option>
-            <option value="85">MATRA</option>
-            <option value="35">MAZDA</option>
-            <option value="36">MERCURY</option>
-            <option value="37">MINI</option>
-            <option value="38">MIURA</option>
-            <option value="39">MP LAFER</option>
-            <option value="40">OLDSMOBILE</option>
-            <option value="41">PLYMOUTH</option>
-            <option value="87">PONTIAC</option>
-            <option value="42">PORSCHE</option>
-            <option value="88">PUMA</option>
-            <option value="190">RANGE ROVER</option>
-            <option value="154">ROLLS ROYCE</option>
-            <option value="89">ROVER</option>
-            <option value="45">SAAB</option>
-            <option value="46">SATURN</option>
-            <option value="90">SEAT</option>
-            <option value="47">SHELBY</option>
-            <option value="91">SMART</option>
-            <option value="49">SSANGYONG</option>
-            <option value="50">SUBARU</option>
-            <option value="66">SUZUKI</option>
-            <option value="64">TROLLER</option>
-            <option value="65">VOLVO</option>
-            <option value="53">WILLYS</option>
-          </optgroup>
-          -->
         </select>
       </div>
     </div>
@@ -119,8 +20,141 @@
     <div class="control-group">
       <label class="control-label" for="anoFab">Ano de fabricação</label>
       <div class="controls">
-        <select id="anoFab" name="anoFab" disabled>
-          <option></option>
+        <select id="anoFab" name="anoFab">
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+          <option value="2010">2010</option>
+          <option value="2009">2009</option>
+          <option value="2008">2008</option>
+          <option value="2007">2007</option>
+          <option value="2006">2006</option>
+          <option value="2005">2005</option>
+          <option value="2004">2004</option>
+          <option value="2003">2003</option>
+          <option value="2002">2002</option>
+          <option value="2001">2001</option>
+          <option value="2000">2000</option>
+          <option value="1999">1999</option>
+          <option value="1998">1998</option>
+          <option value="1997">1997</option>
+          <option value="1996">1996</option>
+          <option value="1995">1995</option>
+          <option value="1994">1994</option>
+          <option value="1993">1993</option>
+          <option value="1992">1992</option>
+          <option value="1991">1991</option>
+          <option value="1990">1990</option>
+          <option value="1989">1989</option>
+          <option value="1988">1988</option>
+          <option value="1987">1987</option>
+          <option value="1986">1986</option>
+          <option value="1985">1985</option>
+          <option value="1984">1984</option>
+          <option value="1983">1983</option>
+          <option value="1982">1982</option>
+          <option value="1981">1981</option>
+          <option value="1980">1980</option>
+          <option value="1979">1979</option>
+          <option value="1978">1978</option>
+          <option value="1977">1977</option>
+          <option value="1976">1976</option>
+          <option value="1975">1975</option>
+          <option value="1974">1974</option>
+          <option value="1973">1973</option>
+          <option value="1972">1972</option>
+          <option value="1971">1971</option>
+          <option value="1970">1970</option>
+          <option value="1969">1969</option>
+          <option value="1968">1968</option>
+          <option value="1967">1967</option>
+          <option value="1966">1966</option>
+          <option value="1965">1965</option>
+          <option value="1964">1964</option>
+          <option value="1963">1963</option>
+          <option value="1962">1962</option>
+          <option value="1961">1961</option>
+          <option value="1960">1960</option>
+          <option value="1959">1959</option>
+          <option value="1958">1958</option>
+          <option value="1957">1957</option>
+          <option value="1956">1956</option>
+          <option value="1955">1955</option>
+          <option value="1954">1954</option>
+          <option value="1953">1953</option>
+          <option value="1952">1952</option>
+          <option value="1951">1951</option>
+          <option value="1950">1950</option>
+          <option value="1949">1949</option>
+          <option value="1948">1948</option>
+          <option value="1947">1947</option>
+          <option value="1946">1946</option>
+          <option value="1945">1945</option>
+          <option value="1944">1944</option>
+          <option value="1943">1943</option>
+          <option value="1942">1942</option>
+          <option value="1941">1941</option>
+          <option value="1940">1940</option>
+          <option value="1939">1939</option>
+          <option value="1938">1938</option>
+          <option value="1937">1937</option>
+          <option value="1936">1936</option>
+          <option value="1935">1935</option>
+          <option value="1934">1934</option>
+          <option value="1933">1933</option>
+          <option value="1932">1932</option>
+          <option value="1931">1931</option>
+          <option value="1930">1930</option>
+          <option value="1929">1929</option>
+          <option value="1928">1928</option>
+          <option value="1927">1927</option>
+          <option value="1926">1926</option>
+          <option value="1925">1925</option>
+          <option value="1924">1924</option>
+          <option value="1923">1923</option>
+          <option value="1922">1922</option>
+          <option value="1921">1921</option>
+          <option value="1920">1920</option>
+          <option value="1919">1919</option>
+          <option value="1918">1918</option>
+          <option value="1917">1917</option>
+          <option value="1916">1916</option>
+          <option value="1915">1915</option>
+          <option value="1914">1914</option>
+          <option value="1913">1913</option>
+          <option value="1912">1912</option>
+          <option value="1911">1911</option>
+          <option value="1910">1910</option>
+          <option value="1909">1909</option>
+          <option value="1908">1908</option>
+          <option value="1907">1907</option>
+          <option value="1906">1906</option>
+          <option value="1905">1905</option>
+          <option value="1904">1904</option>
+          <option value="1903">1903</option>
+          <option value="1902">1902</option>
+          <option value="1901">1901</option>
+          <option value="1900">1900</option>
+          <option value="1899">1899</option>
+          <option value="1898">1898</option>
+          <option value="1897">1897</option>
+          <option value="1896">1896</option>
+          <option value="1895">1895</option>
+          <option value="1894">1894</option>
+          <option value="1893">1893</option>
+          <option value="1892">1892</option>
+          <option value="1891">1891</option>
+          <option value="1890">1890</option>
+          <option value="1889">1889</option>
+          <option value="1888">1888</option>
+          <option value="1887">1887</option>
+          <option value="1886">1886</option>
+          <option value="1885">1885</option>
+          <option value="1884">1884</option>
+          <option value="1883">1883</option>
+          <option value="1882">1882</option>
+          <option value="1881">1881</option>
         </select>
       </div>
     </div>
@@ -128,16 +162,24 @@
       <label class="control-label" for="anoMod">Ano do modelo</label>
       <div class="controls">
         <select id="anoMod" name="anoMod" disabled>
-          <option></option>
+          <option>Selecione</option>
         </select>
       </div>
     </div>
+    <!--
     <div class="control-group">
       <label class="control-label" for="versao">Versão</label>
       <div class="controls">
         <select id="versao" name="versao" disabled>
           <option></option>
         </select>
+      </div>
+    </div>
+    -->
+    <div class="control-group">
+      <label class="control-label" for="versao">Versão</label>
+      <div class="controls">
+        <input type="text" id="versao" name="versao" placeholder="Ex.: 1.6 EcoMotion">
       </div>
     </div>
     <h3>Localização</h3>
@@ -204,6 +246,23 @@
         <label class="radio">
           <input type="radio" name="combustivel" id="combustivel" value="Álcool">
           Álcool
+        </label>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Câmbio</label>
+      <div class="controls">
+        <label class="radio">
+          <input type="radio" name="transmissao" id="transmissao" value="Manual">
+          Manual
+        </label>
+        <label class="radio">
+          <input type="radio" name="transmissao" id="transmissao" value="Automático">
+          Automático
+        </label>
+        <label class="radio">
+          <input type="radio" name="transmissao" id="transmissao" value="Tiptronic">
+          Tiptronic
         </label>
       </div>
     </div>

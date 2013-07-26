@@ -46,7 +46,7 @@
       <div class="row-fluid">
         
         
-        <form action="http://localhost/autocloud/admin/meusanuncios/do_upload/<?=$this->anuncio->id?>" id="fotos" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+        <form action="<?=base_url()?>admin/meusanuncios/do_upload/<?=$this->anuncio->id?>" id="fotos" method="post" accept-charset="utf-8" enctype="multipart/form-data">
           
           <h3>Fotos</h3>
           <div class="row-fuid clearfix fotos">
@@ -58,7 +58,7 @@
                 <div class="span2 foto">
                   <h5>Foto <?=$i?></h5>
                   <div class="img-polaroid">
-                    <img src="http://localhost/autocloud/uploads/thumb_<?=$row->ImageSRC?>" >
+                    <img src="<?=base_url()?>uploads/thumb_<?=$row->ImageSRC?>" >
                   </div>
                   <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
                 </div>
@@ -71,7 +71,7 @@
                   <div class="span2 foto">
                     <h5>Foto <?=$i?></h5>
                     <div class="img-polaroid">
-                      <img src="http://localhost/autocloud/uploads/img_140x140.png" >
+                      <img src="<?=base_url()?>uploads/img_140x140.png" >
                     </div>
                     <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
                   </div>
@@ -87,7 +87,7 @@
                 <div class="span2 foto">
                   <h5>Foto <?=$i?></h5>
                   <div class="img-polaroid">
-                    <img src="http://localhost/autocloud/uploads/img_140x140.png" >
+                    <img src="<?=base_url()?>uploads/img_140x140.png" >
                   </div>
                   <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
                 </div>
@@ -145,6 +145,8 @@
       var endpoint = 'http://www.autocloud.com.br/webservice/';
       //var endpoint = 'http://localhost/autocloud/webservice/';
 
+      var tipo_veiculo = $('#TipoVeiculo').val();
+
       $(document).ready(function(){
         $('input[type=file]').bootstrapFileInput();
         $("#valor_venda").maskMoney({thousands:'.', decimal:','});
@@ -160,11 +162,11 @@
       //Carrega Fabricantes
       $.ajax({
         type: 'GET',
-        url: endpoint+'carros/montadoras',
+        url: endpoint+'carros/montadoras/'+tipo_veiculo,
         success: function (data){
           $('#fabricante').append('<option disabled></option>');
           $.each(data, function(i, fabricante){
-            $('#fabricante').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
+            $('#fabricante').append('<option value="'+fabricante.Chave+'">'+fabricante.Nome+'</option>');
           });
           $('#fabricante').select2({
             placeholder: "Selecine uma marca",
@@ -209,14 +211,14 @@
 
       $('#fabricante').change(function(){
         var fabricante_id = $(this).val();
-        $('#modelo').append('<option value="false">Aguarde</option>');
+        $('#modelo').html('<option value="false">Aguarde</option>');
         $.ajax({
           type: 'GET',
-          url: endpoint+'carros/modelos/'+fabricante_id,
+          url: endpoint+'carros/modelos/'+tipo_veiculo+'/'+fabricante_id,
           success: function (data){
             $('#modelo').html('<option></option>');
             $.each(data, function(i, modelo){
-              $('#modelo').append('<option value="'+modelo.id+'">'+modelo.Nome+'</option>');
+              $('#modelo').append('<option value="'+modelo.Chave+'">'+modelo.Nome+'</option>');
             });
             $('#modelo').select2({
               placeholder: "Selecine um modelo",
@@ -230,6 +232,7 @@
           }
         });
       });
+      /*
       $('#modelo').change(function(){
         var fabricante_id = $(this).val();
         $('#anoFab').empty();
@@ -302,6 +305,32 @@
       $('#versao').change(function(){
         $('#versao option:selected').each(function () {
           $('#versaoText').val($(this).text());
+        });
+      });
+      */
+      $('#modelo').change(function(){
+        $('#modelo option:selected').each(function () {
+          $('#modeloText').val($(this).text());
+        });
+      });
+      $('#anoFab').change(function(){
+        
+        var ano_fab = parseInt($(this).val());
+        var ano_mod = ano_fab+1;
+        $('#anoMod').empty();
+        $('#anoMod').append('<option value="'+ano_fab+'">'+ano_fab+'</option>');
+        $('#anoMod').append('<option value="'+ano_mod+'">'+ano_mod+'</option>');
+        $("#anoMod").select2({
+          placeholder: "Ano do modelo",
+          allowClear: true
+        });
+        $('#anoMod option:selected').each(function () {
+          $('#AnoFabText').val($(this).text());
+        });
+      });
+      $('#anoMod').change(function(){
+        $('#anoMod option:selected').each(function () {
+          $('#AnoModText').val($(this).text());
         });
       });
       $('#estado').change(function(){
