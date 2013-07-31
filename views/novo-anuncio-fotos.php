@@ -54,6 +54,7 @@
           <div class="control-group well clearfix">
             <div class="controls">
               <button type="submit" class="btn btn-primary btn-large pull-right">Enviar</button>
+              <a href="<?=base_url()?>admin/novoanuncio/sucesso/<?=$this->anuncio->id?>" class="btn btn-large pull-right">Pular essa etapa</a>
             </div>
           </div>
           

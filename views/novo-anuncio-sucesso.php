@@ -20,32 +20,23 @@
           <p class="lead">Concluído! Você terminou de criar o seu anúncio e já pode <a href="<?=base_url()?>admin/meusanuncios/anuncio/<?=$this->anuncio->id?>">visualiza-lo</a>.</p>
           <h3><?=$this->anuncio->Titulo?></h3>
           <p><?=$this->anuncio->Descricao?></p>
-          <h4>Fotos</h4>
+          
           <div class="span12">
 
             <?php
-            foreach ($array_imagens as $row) {
+            if($array_imagens){
+              ?>
+              <h4>Fotos</h4>
+              <?php
+              foreach ($array_imagens as $row) {
             ?>
               <div class="span2 foto">
                 <div class="img-polaroid">
                   <img src="<?=base_url()?>uploads/thumb_<?=$row->ImageSRC?>" >
                 </div>
-                <!--
-                <p><?=$row->id?> - <?=$row->IndexList?></p>
-                
-                <div class="btn-group">
-                  <button class="btn">Visualizar</button>
-                  <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#"><i class="icon-edit"></i> Alterar</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="icon-trash"></i> Excluir</a></li>
-                  </ul>
-                </div>
-                -->
               </div>
-
             <?php
+              }
             }
             ?>
           </div>

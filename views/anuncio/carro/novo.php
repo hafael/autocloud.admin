@@ -236,7 +236,7 @@
       <label class="control-label">Combustível</label>
       <div class="controls">
         <label class="radio">
-          <input type="radio" name="combustivel" id="combustivel" value="Flex" checked>
+          <input type="radio" name="combustivel" id="combustivel" value="Flex">
           Flex
         </label>
         <label class="radio">
@@ -247,23 +247,47 @@
           <input type="radio" name="combustivel" id="combustivel" value="Álcool">
           Álcool
         </label>
+        <label class="radio">
+          <input type="radio" name="combustivel" id="combustivel" value="Diesel">
+          Diesel
+        </label>
+        <label class="radio">
+          <input type="radio" name="combustivel" id="combustivel" value="MultiFlex">
+          MultiFlex
+        </label>
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label">Câmbio</label>
+      <label class="control-label" for="transmissao">Câmbio</label>
       <div class="controls">
-        <label class="radio">
-          <input type="radio" name="transmissao" id="transmissao" value="Manual">
-          Manual
-        </label>
-        <label class="radio">
-          <input type="radio" name="transmissao" id="transmissao" value="Automático">
-          Automático
-        </label>
-        <label class="radio">
-          <input type="radio" name="transmissao" id="transmissao" value="Tiptronic">
-          Tiptronic
-        </label>
+        <select id="transmissao" name="transmissao">
+          <option value="Manual">Manual</option>
+          <option value="Automático">Automático</option>
+          <option value="Semi-Automático">Semi-Automático</option>
+          <option value="Tiptronic">Tiptronic</option>
+          <option value="CVT">CVT</option>
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="portas">Portas</label>
+      <div class="controls">
+        <select id="portas" name="portas">
+          <option value="2">2 Portas</option>
+          <option value="3">3 Portas</option>
+          <option value="4">4 Portas</option>
+          <option value="5">5 Portas</option>
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="km">Quilometragem</label>
+      <div class="controls">
+        <div class="input-append">
+          <input class="span8" id="quilometragem" name="quilometragem" type="text" value="0">
+          <span class="add-on">Km</span>
+        </div>
+        <div class="help-inline">Vazio para 0km</div>
       </div>
     </div>
     <div class="control-group">
@@ -271,15 +295,15 @@
       <div class="controls">
         <div class="input-prepend">
           <span class="add-on">R$</span>
-          <input class="span8" id="valor_venda" name="valor_venda" type="text">
+          <input class="span8" id="valor_venda" name="valor_venda" type="text" >
         </div>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="tel_contato">Telefone para contato</label>
       <div class="controls">
-        <input type="text" class="disabled" id="tel_contato" name="tel_contato" value="(21) 8083-6612" >
-        <div class="help"><a href="#">Usar outro número</a></div>
+        <input type="text" class="span5" id="tel_contato" name="tel_contato" value="(21) 8083-6612" >
+        <div class="help-inline">Será exibido no anúncio</div>
       </div>
     </div>
     <div class="control-group">

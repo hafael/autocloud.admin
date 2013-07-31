@@ -26,6 +26,8 @@
 		var $AirBag;
 		var $GasNatural;
 		var $Blindado;
+		var $Km;
+		var $Portas;
 
 		var $nome_tabela;
 		var $data_base_object;
@@ -68,6 +70,8 @@
 				$this->AirBag = $id['AirBag'];
 				$this->GasNatural = $id['GasNatural'];
 				$this->Blindado = $id['Blindado'];
+				$this->Km = $id['Km'];
+				$this->Portas = $id['Portas'];
 
 
 
@@ -96,6 +100,8 @@
 				$this->AirBag = $id->AirBag;
 				$this->GasNatural = $id->GasNatural;
 				$this->Blindado = $id->Blindado;
+				$this->Km = $id->Km;
+				$this->Portas = $id->Portas;
 
 				return true;
 
@@ -135,6 +141,8 @@
 				    	$this->AirBag = $row->AirBag;
 				    	$this->GasNatural = $row->GasNatural;
 				    	$this->Blindado = $row->Blindado;
+				    	$this->Km = $row->Km;
+				    	$this->Portas = $row->Portas;
 
 
 					}

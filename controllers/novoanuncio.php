@@ -100,8 +100,8 @@ class NovoAnuncio extends CI_Controller {
                 'AnoFab' => (int)$this->input->post('anoFab'),
                 'AnoMod' => (int)$this->input->post('anoMod'),
                 'Versao' => $this->input->post('versao'),
-                'TB_FabricanteVeiculo_id' => $this->input->post('fabricante'),
-                'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => $this->input->post('modelo'),
+                'TB_FabricanteVeiculo_id' => (int)$this->input->post('fabricante'),
+                'TB_ModeloVeiculo_TB_FabricanteVeiculo_id' => (int)$this->input->post('modelo'),
                 'ArCondicionado' => (bool)$this->input->post('ar_condicionado'),
                 'VidroEletrico' => (bool)$this->input->post('vidro_eletrico'),
                 'DirecaoHidraulica' => (bool)$this->input->post('direcao_hidraulica'),
@@ -109,7 +109,9 @@ class NovoAnuncio extends CI_Controller {
                 'GasNatural' => (bool)$this->input->post('gas_natural'),
                 'Blindado' => (bool)$this->input->post('blindado'),
                 'Combustivel' => $this->input->post('combustivel'),
-                'Transmissao' => $this->input->post('transmissao')
+                'Transmissao' => $this->input->post('transmissao'),
+                'Portas' => (int)$this->input->post('portas'),
+                'Km' => (int)$this->input->post('quilometragem')
             );
 			$this->anuncio_carro->adiciona($array_tb_anuncio_carro);
 
@@ -360,6 +362,8 @@ class NovoAnuncio extends CI_Controller {
         
 		$data['array_imagens'] = $this->anuncio_imagens->lista($this->anunciante->id, $this->anuncio->id);
 
+        $data['array_imagens'] = false;
+        
         $this->load->view('novo-anuncio-sucesso', $data);
 
 	}

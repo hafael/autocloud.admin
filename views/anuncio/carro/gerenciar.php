@@ -253,20 +253,40 @@
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label">Câmbio</label>
+      <label class="control-label" for="transmissao">Câmbio</label>
       <div class="controls">
-        <label class="radio">
-          <input type="radio" name="transmissao" id="transmissao" value="Manual" <?php if($this->anuncio_carro->Transmissao=="Manual") echo "checked"?> >
-          Manual
-        </label>
-        <label class="radio">
-          <input type="radio" name="transmissao" id="transmissao" value="Automático" <?php if($this->anuncio_carro->Transmissao=="Automático") echo "checked"?> >
-          Automático
-        </label>
-        <label class="radio">
-          <input type="radio" name="transmissao" id="transmissao" value="Tiptronic" <?php if($this->anuncio_carro->Transmissao=="Tiptronic") echo "checked"?> >
-          Tiptronic
-        </label>
+        <select id="transmissao" name="transmissao">
+          <option value="<?=$this->anuncio_carro->Transmissao?>"><?=$this->anuncio_carro->Transmissao?></option>
+          <option disabled></option>
+          <option value="Manual">Manual</option>
+          <option value="Automático">Automático</option>
+          <option value="Semi-Automático">Semi-Automático</option>
+          <option value="Tiptronic">Tiptronic</option>
+          <option value="CVT">CVT</option>
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="portas">Portas</label>
+      <div class="controls">
+        <select id="portas" name="portas">
+          <option value="<?=$this->anuncio_carro->Portas?>"><?=$this->anuncio_carro->Portas?> Portas</option>
+          <option disabled></option>
+          <option value="2">2 Portas</option>
+          <option value="3">3 Portas</option>
+          <option value="4">4 Portas</option>
+          <option value="5">5 Portas</option>
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="km">Quilometragem</label>
+      <div class="controls">
+        <div class="input-append">
+          <input class="span8" id="quilometragem" name="quilometragem" type="text" value="<?=$this->anuncio_carro->Km?>">
+          <span class="add-on">Km</span>
+        </div>
+        <div class="help-inline">Vazio para 0km</div>
       </div>
     </div>
     <div class="control-group">
@@ -282,7 +302,7 @@
       <label class="control-label" for="tel_contato">Telefone para contato</label>
       <div class="controls">
         <input type="text" class="disabled" id="tel_contato" name="tel_contato" value="<?=$this->anuncio->TelContato?>" >
-        <div class="help"><a href="#">Usar outro número</a></div>
+        <div class="help-inline">Será exibido no anúncio</div>
       </div>
     </div>
     <div class="control-group">

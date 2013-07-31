@@ -142,8 +142,12 @@
     </style>
     <script type="text/javascript">
 
-      var endpoint = 'http://www.autocloud.com.br/webservice/';
-      //var endpoint = 'http://localhost/autocloud/webservice/';
+      var endpoint;
+      if (location.host=='localhost') {
+        endpoint = location.protocol+'//'+location.host+'/autocloud/webservice/';
+      }else{
+        endpoint = location.protocol+'//'+location.host+'/webservice/';
+      }
 
       var tipo_veiculo = $('#TipoVeiculo').val();
 
@@ -362,6 +366,7 @@
           $('#CidadeText').val($(this).text());
         });
       });
+      
 
       $("#modelo").select2({
         placeholder: "Selecine um modelo",
@@ -375,10 +380,6 @@
         placeholder: "Ano do modelo",
         allowClear: true
       });
-      $("#versao").select2({
-        placeholder: "Versão do veículo",
-        allowClear: true
-      });
       $("#estado").select2({
         placeholder: "Selecione o estado",
         allowClear: true
@@ -387,6 +388,9 @@
         placeholder: "Selecione a cidade",
         allowClear: true
       });
+      $("#portas, #transmissao").select2();
+
+      
     </script>
 
 
