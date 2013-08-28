@@ -105,7 +105,7 @@
       //Carrega Cidades
       $.ajax({
         type: 'GET',
-        url: endpoint+'estadocidade/estados',
+        url: endpoint+'estadocidade/cidades/'+$('#estado').val(),
         success: function (data){
           $('#cidade').append('<option disabled></option>');
           $.each(data, function(i, fabricante){
