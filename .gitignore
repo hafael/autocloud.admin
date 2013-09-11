@@ -1,3 +1,4 @@
+*.DS_Store
 */config/development
 
 */logs/log-*.php
@@ -8,3 +9,5 @@
 !*/cache/.htaccess
 !*/cache/index.html
 
+*/config/config.php
+*/config/database.php
