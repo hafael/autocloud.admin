@@ -28,6 +28,7 @@ class NovoAnuncio extends CI_Controller {
 		$this->load->library('upload');
         $this->load->library('image_lib');
         $this->load->library('moedas');
+        $this->load->library('S3');
 		$this->load->model('TB_Anunciante','anunciante');
         $this->load->model('TB_AnunciantePessoaFisica','anunciantePF');
 		$this->load->model('TB_Anuncio','anuncio');

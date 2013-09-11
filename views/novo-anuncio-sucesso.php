@@ -32,7 +32,7 @@
             ?>
               <div class="span2 foto">
                 <div class="img-polaroid">
-                  <img src="<?=base_url()?>uploads/thumb_<?=$row->ImageSRC?>" >
+                  <img src="http://s3-sa-east-1.amazonaws.com/autocloud.images/thumb_<?=$row->ImageSRC?>" >
                 </div>
               </div>
             <?php

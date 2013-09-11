@@ -58,7 +58,7 @@
                 <div class="span2 foto">
                   <h5>Foto <?=$i?></h5>
                   <div class="img-polaroid">
-                    <img src="<?=base_url()?>uploads/thumb_<?=$row->ImageSRC?>" >
+                    <img src="http://s3-sa-east-1.amazonaws.com/autocloud.images/thumb_<?=$row->ImageSRC?>" >
                   </div>
                   <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
                 </div>

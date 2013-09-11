@@ -28,6 +28,7 @@ class MeusAnuncios extends CI_Controller {
 		$this->load->library('upload');
         $this->load->library('image_lib');
         $this->load->library('moedas');
+        $this->load->library('S3');
 		$this->load->model('TB_Anunciante','anunciante');
 		$this->load->model('TB_AnunciantePessoaFisica','anunciantePF');
 		$this->load->model('TB_Anuncio','anuncio');
@@ -250,6 +251,7 @@ class MeusAnuncios extends CI_Controller {
 	                $i++;   
 	            }
 	        }
+            
 	        // Unset the useless one ;)
 	        unset($_FILES['userfile']);
 	    
@@ -272,9 +274,13 @@ class MeusAnuncios extends CI_Controller {
 	                // otherwise, put the upload datas here.
 	                // if you want to use database, put insert query in this loop
 	                $upload_data = $this->upload->data();
+	                
+	                $bucketImagesName = 'autocloud.images';
+	    			$this->s3->getBucket($bucketImagesName);
 
-	                
-	                
+		            $image_name = $upload_data['file_name'];
+					$original_image_file = $upload_data['full_path'];
+		            
 	                $array_tb_anuncio = array(
 						'TB_Anunciante_id' => $this->anunciante->id,
 						'TB_Anuncio_id' => $id_anuncio,
@@ -310,6 +316,17 @@ class MeusAnuncios extends CI_Controller {
 	                {
 	                    // otherwise, put each upload data to an array.
 	                    $success[] = $upload_data;
+
+	                    $image_name = 'high_'.$upload_data['file_name'];
+						$image_file = $resize_high['new_image'];
+			            // upload to s3 bucket
+						if($this->s3->putObject($this->s3->inputFile($image_file, false), $bucketImagesName, $image_name, S3::ACL_PUBLIC_READ)) {
+						    // delete temp local file on Success
+						    unlink($image_file);
+						} else {
+						    // delete temp local file on Failure
+						    unlink($image_file);
+						}
 	                }
 
 
@@ -340,6 +357,17 @@ class MeusAnuncios extends CI_Controller {
 	                {
 	                    // otherwise, put each upload data to an array.
 	                    $success[] = $upload_data;
+
+	                    $image_name = 'medium_'.$upload_data['file_name'];
+						$image_file = $upload_data['file_path'].'medium_'.$upload_data['file_name'];
+			            // upload to s3 bucket
+						if($this->s3->putObject($this->s3->inputFile($image_file, false), $bucketImagesName, $image_name, S3::ACL_PUBLIC_READ)) {
+						    // delete temp local file on Success
+						    unlink($image_file);
+						} else {
+						    // delete temp local file on Failure
+						    unlink($image_file);
+						}
 	                }
 
 	                //Image resize thumb
@@ -369,7 +397,19 @@ class MeusAnuncios extends CI_Controller {
 	                {
 	                    // otherwise, put each upload data to an array.
 	                    $success[] = $upload_data;
+
+	                    $image_name = 'thumb_'.$upload_data['file_name'];
+						$image_file = $upload_data['file_path'].'thumb_'.$upload_data['file_name'];
+			            // upload to s3 bucket
+						if($this->s3->putObject($this->s3->inputFile($image_file, false), $bucketImagesName, $image_name, S3::ACL_PUBLIC_READ)) {
+						    // delete temp local file on Success
+						    unlink($image_file);
+						} else {
+						    // delete temp local file on Failure
+						    unlink($image_file);
+						}
 	                }
+	                unlink($original_image_file);
 
 
 	            }
