@@ -15,8 +15,8 @@
 |
 */
 
-$config['base_url']    = 'http://www.autocloud.com.br/';
-$config['upload_folder']    = 'http://www.autocloud.com.br/uploads/';
+$config['base_url']    = 'http://localhost/autocloud/';
+$config['upload_folder']    = 'http://localhost/autocloud/uploads/';
 
 /*
 |--------------------------------------------------------------------------

@@ -38,7 +38,7 @@ class MeusAnuncios extends CI_Controller {
 		$this->anunciante->define($this->session->userdata('id_login'));
 		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-			redirect(base_url().'login/?redirectURL='.current_url(), 'refresh');
+			redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
 		}
 	}
 

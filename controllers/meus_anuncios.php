@@ -25,7 +25,7 @@ class MeusAnuncios extends CI_Controller {
 		$this->load->helper('url');
 		if(!$this->anunciante->logged()){
 
-			redirect('login/?redirectURL='.current_url(), 'refresh');
+			redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
 		}
 	}
 

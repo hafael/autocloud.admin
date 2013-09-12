@@ -18,7 +18,7 @@ class Upload extends CI_Controller
         $this->load->library('upload');
         $this->load->library('image_lib');
         if(!$this->anunciante->logged()){
-            redirect('../login/?redirectURL='.current_url(), 'refresh');
+           redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
         }
     }
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Login extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,37 +25,38 @@ class Home extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->helper('path');
 		$this->load->helper('directory');
-		$this->load->library('upload');
-        $this->load->library('image_lib');
-        $this->load->library('moedas');
 		$this->load->model('TB_Anunciante','anunciante');
-		$this->load->model('TB_AnunciantePessoaFisica','anunciantePF');
-		$this->load->model('TB_Anuncio','anuncio');
-		$this->load->model('TB_AnuncioCarro','anuncio_carro');
-		$this->load->model('TB_ImagensAnuncio','anuncio_imagens');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
-		if(!$this->anunciante->logged()){
-			redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
-		}
-	}
-
-	public function index(){
 		
-  		redirect(base_url().'admin/meus-anuncios', 'refresh');
 	}
-	
 
-	
-	
+	function index() {
 
-	
-	
-	
-	
+		if($this->anunciante->logged()){
+			redirect(base_url().'admin/', 'refresh');
+		}else{
+			if($this->input->post('email')){
+	        	if($this->anunciante->autentica_login($this->input->post('email'), $this->input->post('senha')) === true){
+					$this->session->set_userdata('id_login', $this->anunciante->id);
+					$this->session->set_userdata('logged', true);
+					if($this->input->get('redirectURL')){
+						redirect($this->input->get('redirectURL'), 'refresh');
+					}else{
+						redirect('admin/home', 'refresh');
+					}
+				}else{
+					redirect('login?erro=403', 'refresh');
+				}
+	        }
+	        $this->load->view('login');
+		}
 
-	
-
+        
+    }
+    public function logout(){
+	   $this->session->unset_userdata('logged');
+	   $this->session->unset_userdata('id_login');
+	   redirect(base_url().'admin/login/', 'refresh');
+	}
 }
 
 /* End of file welcome.php */
