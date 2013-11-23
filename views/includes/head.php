@@ -3,6 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="Mobfash e-Ideas">
+<meta name="baseurl" content="<?=base_url()?>">
+
 
 <!-- Le styles -->
 <link href="<?=base_url()?>applications/admin/views/bootstrap/css/bootstrap.css" rel="stylesheet">
