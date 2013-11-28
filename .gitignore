@@ -8,6 +8,3 @@
 */cache/*
 !*/cache/.htaccess
 !*/cache/index.html
-
-*/config/config.php
-*/config/database.php
