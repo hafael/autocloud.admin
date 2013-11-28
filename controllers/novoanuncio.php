@@ -33,11 +33,12 @@ class NovoAnuncio extends CI_Controller {
         $this->load->model('TB_AnunciantePessoaFisica','anunciantePF');
 		$this->load->model('TB_Anuncio','anuncio');
 		$this->load->model('TB_ImagensAnuncio','anuncio_imagens');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-			redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
-		}
+            redirect(base_url().'login/', 'refresh');
+        }else{
+            $this->anunciante->define($this->session->userdata('id_login'));
+            $this->anunciantePF->define($this->session->userdata('id_login'));
+        }
 	}
 
 	public function index(){
@@ -196,7 +197,7 @@ class NovoAnuncio extends CI_Controller {
         $new_file_name = md5(date('Y m d H:i:s').uniqid(mt_rand()));
 
         $upload_conf = array(
-            'upload_path'   =>  realpath('../uploads'),
+            'upload_path'   =>  realpath('uploads'),
             'allowed_types' => 'gif|jpg|png',
             'max_size'      => '30000',
             'file_name'     => $new_file_name
@@ -399,7 +400,7 @@ class NovoAnuncio extends CI_Controller {
         
 		$data['array_imagens'] = $this->anuncio_imagens->lista($this->anunciante->id, $this->anuncio->id);
 
-        $data['array_imagens'] = false;
+        //$data['array_imagens'] = false;
         
         $this->load->view('novo-anuncio-sucesso', $data);
 

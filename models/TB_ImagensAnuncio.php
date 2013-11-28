@@ -90,6 +90,7 @@
 			//cria consulta
 			$this->data_base_object->where('TB_Anunciante_id', $id_anunciante);
 			$this->data_base_object->where('TB_Anuncio_id', $id_anuncio);
+			$this->data_base_object->where('Ativo', true);
 			$this->data_base_object->order_by('id', 'desc');
 			$this->data_base_object->order_by('IndexList', 'desc');
 			$this->data_base_object->limit(6);
@@ -118,6 +119,7 @@
 			$this->data_base_object->where('TB_Anunciante_id', $id_anunciante);
 			$this->data_base_object->where('TB_Anuncio_id', $id_anuncio);
 			$this->data_base_object->where('IndexList', $indexlist);
+			$this->data_base_object->where('Ativo', true);
 			$this->data_base_object->limit(1);
 
 
@@ -142,6 +144,27 @@
 			$this->define((int)$this->data_base_object->insert_id());
 			
 			return (int)$this->data_base_object->insert_id();
+	
+	    }
+
+	    function desativa($id_anuncio, $id_anunciante, $id_imagem){
+    		//load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+
+			$array_dados = array('Ativo' => false);
+			
+			//cria consulta
+			$this->data_base_object->where('TB_Anunciante_id', (int)$id_anunciante);
+			$this->data_base_object->where('TB_Anuncio_id', (int)$id_anuncio);
+			$this->data_base_object->where('id', (int)$id_imagem);
+			$this->data_base_object->update($this->nome_tabela, $array_dados);
+
+			//$this->data_base_object->update($this->nome_tabela, $array_dados);
+			
+			//Define o objeto com o last id do banco	
+			$this->define((int)$id_anuncio);
+			
+			return (int)$id_anuncio;
 	
 	    }
 		

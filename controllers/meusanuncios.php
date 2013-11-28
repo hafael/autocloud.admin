@@ -35,11 +35,13 @@ class MeusAnuncios extends CI_Controller {
 		$this->load->model('TB_AnuncioCarro','anuncio_carro');
 		$this->load->model('TB_AnuncioMoto','anuncio_moto');
 		$this->load->model('TB_ImagensAnuncio','anuncio_imagens');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-			redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
+			redirect(base_url().'login/', 'refresh');
+		}else{
+			$this->anunciante->define($this->session->userdata('id_login'));
+			$this->anunciantePF->define($this->session->userdata('id_login'));
 		}
+		
 	}
 
 	public function index(){
@@ -126,7 +128,7 @@ class MeusAnuncios extends CI_Controller {
 
 				//var_dump($array_tb_anuncio);
 
-				redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+				redirect(base_url().'meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 			}
 			// View
 			$this->load->view('anuncio', $data);
@@ -171,7 +173,7 @@ class MeusAnuncios extends CI_Controller {
 
 				//var_dump($array_tb_anuncio);
 
-				redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+				redirect(base_url().'meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 			}
 			// View
 			$this->load->view('anuncio', $data);
@@ -179,6 +181,11 @@ class MeusAnuncios extends CI_Controller {
 
 		
         
+	}
+	public function remover_imagem($id_anuncio, $id_imagem){
+		$this->anuncio->define($id_anuncio);
+		$this->anuncio_imagens->desativa($this->anuncio->id, $this->anuncio->TB_Anunciante_id, $id_imagem);
+		redirect(base_url().'meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 	}
 	public function get_fabricantes(){
 		$this->load->model('TB_FabricanteVeiculo','fabricante');
@@ -231,7 +238,7 @@ class MeusAnuncios extends CI_Controller {
         $new_file_name = md5(date('Y m d H:i:s').uniqid(mt_rand()));
 
         $upload_conf = array(
-            'upload_path'   =>  realpath('../uploads'),
+            'upload_path'   =>  realpath('uploads'),
             'allowed_types' => 'gif|jpg|png',
             'max_size'      => '30000',
             'file_name'     => $new_file_name
@@ -426,7 +433,7 @@ class MeusAnuncios extends CI_Controller {
 	        }
     	}
         
-        redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+        redirect(base_url().'meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
     }
 
     public function desativa($id_anuncio){
@@ -435,7 +442,7 @@ class MeusAnuncios extends CI_Controller {
 
     	$this->anuncio->desativa($this->anuncio->id);
 
-    	redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+    	redirect(base_url().'meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 
     }
     public function ativa($id_anuncio){
@@ -444,7 +451,7 @@ class MeusAnuncios extends CI_Controller {
 
     	$this->anuncio->ativa($this->anuncio->id);
 
-    	redirect(base_url().'admin/meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
+    	redirect(base_url().'meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 
     }
     public function remove($id_anuncio){
@@ -453,7 +460,7 @@ class MeusAnuncios extends CI_Controller {
 
     	$this->anuncio->remove($this->anuncio->id);
 
-    	redirect(base_url().'admin/meusanuncios/', 'refresh');
+    	redirect(base_url().'meusanuncios/', 'refresh');
 
     }
 

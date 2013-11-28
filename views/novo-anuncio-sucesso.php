@@ -17,7 +17,7 @@
         
         
         <div class="span12">
-          <p class="lead">Concluído! Você terminou de criar o seu anúncio e já pode <a href="<?=base_url()?>admin/meusanuncios/anuncio/<?=$this->anuncio->id?>">visualiza-lo</a>.</p>
+          <p class="lead">Concluído! Você terminou de criar o seu anúncio e já pode <a href="<?=base_url()?>meusanuncios/anuncio/<?=$this->anuncio->id?>">visualiza-lo</a>.</p>
           <h3><?=$this->anuncio->Titulo?></h3>
           <p><?=$this->anuncio->Descricao?></p>
           
@@ -43,7 +43,7 @@
           
           
 
-          <a class="btn btn-primary" href="<?=base_url()?>admin/meusanuncios/anuncio/<?=$this->anuncio->id?>">Ver anúncio</a>
+          <a class="btn btn-primary" href="<?=base_url()?>meusanuncios/anuncio/<?=$this->anuncio->id?>">Ver anúncio</a>
         </div>
 
       </div>

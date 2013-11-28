@@ -26,36 +26,30 @@ class Login extends CI_Controller {
 		$this->load->helper('path');
 		$this->load->helper('directory');
 		$this->load->model('TB_Anunciante','anunciante');
-		
 	}
 
 	function index() {
-
 		if($this->anunciante->logged()){
-			redirect(base_url().'admin/', 'refresh');
-		}else{
-			if($this->input->post('email')){
-	        	if($this->anunciante->autentica_login($this->input->post('email'), $this->input->post('senha')) === true){
-					$this->session->set_userdata('id_login', $this->anunciante->id);
-					$this->session->set_userdata('logged', true);
-					if($this->input->get('redirectURL')){
-						redirect($this->input->get('redirectURL'), 'refresh');
-					}else{
-						redirect('admin/home', 'refresh');
-					}
-				}else{
-					redirect('login?erro=403', 'refresh');
-				}
-	        }
-	        $this->load->view('login');
+			redirect('home', 'refresh');
 		}
+		if($this->input->post('email')){
+        	if($this->anunciante->autentica_login($this->input->post('email'), $this->input->post('senha')) === true){
+				$this->session->set_userdata('id_login', $this->anunciante->id);
+				$this->session->set_userdata('logged', true);
+				redirect('home/', 'refresh');
+			}else{
+				redirect('login?erro=403', 'refresh');
+			}
+        }
+        $this->load->view('login');
+		
 
         
     }
     public function logout(){
 	   $this->session->unset_userdata('logged');
 	   $this->session->unset_userdata('id_login');
-	   redirect(base_url().'admin/login/', 'refresh');
+	   redirect(base_url().'login', 'refresh');
 	}
 }
 

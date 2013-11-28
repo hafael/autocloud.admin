@@ -46,7 +46,7 @@
       <div class="row-fluid">
         
         
-        <form action="<?=base_url()?>admin/meusanuncios/do_upload/<?=$this->anuncio->id?>" id="fotos" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+        <form action="<?=base_url()?>meusanuncios/do_upload/<?=$this->anuncio->id?>" id="fotos" method="post" accept-charset="utf-8" enctype="multipart/form-data">
           
           <h3>Fotos</h3>
           <div class="row-fuid clearfix fotos">
@@ -60,7 +60,7 @@
                   <div class="img-polaroid">
                     <img src="http://s3-sa-east-1.amazonaws.com/autocloud.images/thumb_<?=$row->ImageSRC?>" >
                   </div>
-                  <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
+                  <a href="<?=base_url()?>meusanuncios/remover_imagem/<?=$row->TB_Anuncio_id?>/<?=$row->id?>" class="btn btn-block btn-danger">Remover</a>
                 </div>
               <?php
               $i++;
@@ -71,7 +71,7 @@
                   <div class="span2 foto">
                     <h5>Foto <?=$i?></h5>
                     <div class="img-polaroid">
-                      <img src="<?=base_url()?>uploads/img_140x140.png" >
+                      <img src="<?=base_url().APPPATH?>views/img/img_140x140.png" >
                     </div>
                     <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
                   </div>
@@ -87,7 +87,7 @@
                 <div class="span2 foto">
                   <h5>Foto <?=$i?></h5>
                   <div class="img-polaroid">
-                    <img src="<?=base_url()?>uploads/img_140x140.png" >
+                    <img src="<?=base_url().APPPATH?>views/img/img_140x140.png" >
                   </div>
                   <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
                 </div>

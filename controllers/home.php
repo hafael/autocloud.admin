@@ -33,16 +33,17 @@ class Home extends CI_Controller {
 		$this->load->model('TB_Anuncio','anuncio');
 		$this->load->model('TB_AnuncioCarro','anuncio_carro');
 		$this->load->model('TB_ImagensAnuncio','anuncio_imagens');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-			redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
+			redirect(base_url().'login/', 'refresh');
+		}else{
+			$this->anunciante->define($this->session->userdata('id_login'));
+			$this->anunciantePF->define($this->session->userdata('id_login'));
 		}
 	}
 
 	public function index(){
 		
-  		redirect(base_url().'admin/meus-anuncios', 'refresh');
+  		redirect(base_url().'meus-anuncios', 'refresh');
 	}
 	
 

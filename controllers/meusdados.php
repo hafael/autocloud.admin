@@ -30,10 +30,11 @@ class MeusDados extends CI_Controller {
         $this->load->library('moedas');
 		$this->load->model('TB_Anunciante','anunciante');
 		$this->load->model('TB_AnunciantePessoaFisica','anunciantePF');
-		$this->anunciante->define($this->session->userdata('id_login'));
-		$this->anunciantePF->define($this->session->userdata('id_login'));
 		if(!$this->anunciante->logged()){
-			redirect(base_url().'admin/login/?redirectURL='.current_url(), 'refresh');
+			redirect(base_url().'login/', 'refresh');
+		}else{
+			$this->anunciante->define($this->session->userdata('id_login'));
+			$this->anunciantePF->define($this->session->userdata('id_login'));
 		}
 	}
 
@@ -50,7 +51,7 @@ class MeusDados extends CI_Controller {
 			);
 			$this->anunciantePF->edita($this->anunciante->id, $array_anunciante_pf);
 
-			redirect(base_url().'admin/meusdados', 'refresh');
+			redirect(base_url().'meusdados', 'refresh');
 
         };
 		
@@ -63,9 +64,9 @@ class MeusDados extends CI_Controller {
 		if($this->input->post('nova_senha')!='' || $this->input->post('nova_senha')){
 			if($this->anunciante->verifica_password($this->anunciante->Email, $this->input->post('password'))){
 				$this->anunciante->nova_senha($this->anunciante->id, $this->input->post('nova_senha'));
-	    		redirect(base_url().'admin/meusdados/senha/true', 'refresh');
+	    		redirect(base_url().'meusdados/senha/true', 'refresh');
 	    	}else{
-	    		redirect(base_url().'admin/meusdados/senha/false', 'refresh');
+	    		redirect(base_url().'meusdados/senha/false', 'refresh');
 	    	}
 		}
 
@@ -79,7 +80,7 @@ class MeusDados extends CI_Controller {
     		$this->anunciante->desativa($this->anunciante->id);
     		redirect(base_url().'logout/', 'refresh');
     	}else{
-    		redirect(base_url().'admin/meusdados', 'refresh');
+    		redirect(base_url().'meusdados', 'refresh');
     	}
 
 

@@ -16,10 +16,10 @@
 */
 
 $config['base_url'] = ($_SERVER['HTTP_HOST']=='localhost') ? 
-  'http://localhost/autocloud/' : // local base url
-  'http://www.autocloud.com.br/autocloud/'; // live base url 
+  'http://localhost/autocloud/admin/' : // local base url
+  'http://admin.autocloud.com.br/'; // live base url 
 
-$config['upload_folder']    = 'http://localhost/autocloud/uploads/';
+$config['upload_folder']    = 'http://localhost/autocloud/admin/uploads/';
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ $config['upload_folder']    = 'http://localhost/autocloud/uploads/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'admin/index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
