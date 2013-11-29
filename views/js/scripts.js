@@ -24,6 +24,8 @@ $("#estado").select2({
 //Carrega Fabricantes
 $.ajax({
   type: 'GET',
+  crossDomain: true,
+  dataType: 'jsonp',
   url: endpoint+'vehicles/brands/type/'+tipo_veiculo,
   success: function (data){
     $('#fabricante').append('<option disabled></option>');
@@ -41,6 +43,8 @@ $.ajax({
 //Carrega Estados
 $.ajax({
   type: 'GET',
+  crossDomain: true,
+  dataType: 'jsonp',
   url: endpoint+'places/states',
   success: function (data){
     $('#estado').append('<option disabled></option>');
@@ -57,6 +61,8 @@ $.ajax({
 //Carrega Cidades
 $.ajax({
   type: 'GET',
+  crossDomain: true,
+  dataType: 'jsonp',
   url: endpoint+'places/cities/id/'+id_estado,
   success: function (data){
     $('#cidade').append('<option disabled></option>');
@@ -75,6 +81,8 @@ $.ajax({
 
 $.ajax({
   type: 'GET',
+  crossDomain: true,
+  dataType: 'jsonp',
   url: endpoint+'vehicles/models/id/'+fabricante_id+'/type/'+tipo_veiculo,
   success: function (data){
     $.each(data, function(i, modelo){
@@ -93,6 +101,8 @@ $('#fabricante').change(function(){
   $('#modelo').html('<option value="false">Aguarde</option>');
   $.ajax({
     type: 'GET',
+    crossDomain: true,
+    dataType: 'jsonp',
     url: endpoint+'vehicles/models/id/'+fabricante_id+'/type/'+tipo_veiculo,
     success: function (data){
       $('#modelo').html('<option></option>');
@@ -218,6 +228,8 @@ $('#estado').change(function(){
   $('#cidade').append('<option value="false">Aguarde</option>');
   $.ajax({
     type: 'GET',
+    crossDomain: true,
+    dataType: 'jsonp',
     url: endpoint+'places/cities/id/'+fabricante_id,
     success: function (data){
       $('#cidade').html('<option></option>');
