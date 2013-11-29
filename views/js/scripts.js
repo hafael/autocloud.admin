@@ -77,24 +77,6 @@ $.ajax({
   }
 });
 
-//Carrega Modelos
-
-$.ajax({
-  type: 'GET',
-  crossDomain: true,
-  dataType: 'jsonp',
-  url: endpoint+'vehicles/models/id/'+fabricante_id+'/type/'+tipo_veiculo,
-  success: function (data){
-    $.each(data, function(i, modelo){
-      $('#modelo').append('<option value="'+modelo.Chave+'">'+modelo.Nome+'</option>');
-    });
-    $('#modelo').select2({
-      placeholder: "Selecine um modelo",
-      allowClear: true
-    });
-    $('#modelo').select2('enable', true);
-  }
-});
 
 $('#fabricante').change(function(){
   var fabricante_id = $(this).val();
