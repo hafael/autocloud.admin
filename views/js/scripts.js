@@ -1,8 +1,8 @@
 var endpoint ;
 if (location.host=='localhost') {
-  endpoint = location.protocol+'//'+location.host+'/autocloud/webservice/';
+  endpoint = location.protocol+'//'+location.host+'/autocloud/api/';
 }else{
-  endpoint = location.protocol+'//'+location.host+'/webservice/';
+  endpoint = 'http://api.autocloud.com.br/';
 }
 
 var tipo_veiculo = $('#TipoVeiculo').val();
@@ -24,11 +24,11 @@ $("#estado").select2({
 //Carrega Fabricantes
 $.ajax({
   type: 'GET',
-  url: endpoint+'carros/montadoras/'+tipo_veiculo,
+  url: endpoint+'vehicles/brands/type/'+tipo_veiculo,
   success: function (data){
     $('#fabricante').append('<option disabled></option>');
-    $.each(data, function(i, fabricante){
-      $('#fabricante').append('<option value="'+fabricante.Chave+'">'+fabricante.Nome+'</option>');
+    $.each(data.brands, function(i, brand){
+      $('#fabricante').append('<option value="'+brand.id+'">'+brand.name+'</option>');
     });
     $('#fabricante').select2({
       placeholder: "Selecine uma marca",
@@ -41,11 +41,11 @@ $.ajax({
 //Carrega Estados
 $.ajax({
   type: 'GET',
-  url: endpoint+'estadocidade/estados',
+  url: endpoint+'places/states',
   success: function (data){
     $('#estado').append('<option disabled></option>');
-    $.each(data, function(i, fabricante){
-      $('#estado').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
+    $.each(data.states, function(i, state){
+      $('#estado').append('<option value="'+state.id+'">'+state.name+'</option>');
     });
     $('#estado').select2({
       placeholder: "Selecione o estado",
@@ -57,11 +57,11 @@ $.ajax({
 //Carrega Cidades
 $.ajax({
   type: 'GET',
-  url: endpoint+'estadocidade/cidades/'+id_estado,
+  url: endpoint+'places/cities/id/'+id_estado,
   success: function (data){
     $('#cidade').append('<option disabled></option>');
-    $.each(data, function(i, fabricante){
-      $('#cidade').append('<option value="'+fabricante.id+'">'+fabricante.Nome+'</option>');
+    $.each(data.cities, function(i, city){
+      $('#cidade').append('<option value="'+city.id+'">'+city.name+'</option>');
     });
     $('#cidade').select2({
       placeholder: "Selecione a cidade",
@@ -75,7 +75,7 @@ $.ajax({
 
 $.ajax({
   type: 'GET',
-  url: endpoint+'carros/modelos/'+tipo_veiculo+'/'+fabricante_id,
+  url: endpoint+'vehicles/models/id/'+fabricante_id+'/type/'+tipo_veiculo,
   success: function (data){
     $.each(data, function(i, modelo){
       $('#modelo').append('<option value="'+modelo.Chave+'">'+modelo.Nome+'</option>');
@@ -93,11 +93,11 @@ $('#fabricante').change(function(){
   $('#modelo').html('<option value="false">Aguarde</option>');
   $.ajax({
     type: 'GET',
-    url: endpoint+'carros/modelos/'+tipo_veiculo+'/'+fabricante_id,
+    url: endpoint+'vehicles/models/id/'+fabricante_id+'/type/'+tipo_veiculo,
     success: function (data){
       $('#modelo').html('<option></option>');
-      $.each(data, function(i, modelo){
-        $('#modelo').append('<option value="'+modelo.Chave+'">'+modelo.Nome+'</option>');
+      $.each(data.models, function(i, model){
+        $('#modelo').append('<option value="'+model.id+'">'+model.name+'</option>');
       });
       $('#modelo').select2({
         placeholder: "Selecine um modelo",
@@ -197,12 +197,12 @@ $('#anoFab').change(function(){
   var ano_fab = parseInt($(this).val());
   var ano_mod = ano_fab+1;
   $('#anoMod').empty();
-  $('#anoMod').append('<option value="'+ano_fab+'">'+ano_fab+'</option>');
-  $('#anoMod').append('<option value="'+ano_mod+'">'+ano_mod+'</option>');
+  $('#anoMod').html('<option value="'+ano_fab+'">'+ano_fab+'</option><option value="'+ano_mod+'">'+ano_mod+'</option>');
   $("#anoMod").select2({
     placeholder: "Ano do modelo",
     allowClear: true
   });
+  $('#anoMod').select2('enable', true);
   $('#anoMod option:selected').each(function () {
     $('#AnoFabText').val($(this).text());
   });
@@ -218,11 +218,11 @@ $('#estado').change(function(){
   $('#cidade').append('<option value="false">Aguarde</option>');
   $.ajax({
     type: 'GET',
-    url: endpoint+'estadocidade/cidades/'+fabricante_id,
+    url: endpoint+'places/cities/id/'+fabricante_id,
     success: function (data){
       $('#cidade').html('<option></option>');
-      $.each(data, function(i, modelo){
-        $('#cidade').append('<option value="'+modelo.id+'">'+modelo.Nome+'</option>');
+      $.each(data.cities, function(i, city){
+        $('#cidade').append('<option value="'+city.id+'">'+city.name+'</option>');
       });
       $('#cidade').select2({
         placeholder: "Selecione a cidade",
