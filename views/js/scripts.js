@@ -10,7 +10,7 @@ var fabricante_id = $('#fabricante').val();
 var id_estado = $('#estado').val();
 
 $(document).ready(function(){
-  //$('input[type=file]').bootstrapFileInput();
+  $('input[type=file]').bootstrapFileInput();
   $("#valor_venda").maskMoney({thousands:'.', decimal:','});
 });
 $("#fabricante").select2({

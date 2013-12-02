@@ -65,7 +65,7 @@
               <?php
               $i++;
               }
-              if($i < 6){
+              if($i <= 6){
                 while( $i <= 6 ){
                   ?>
                   <div class="span2 foto">
@@ -159,6 +159,7 @@
           $('#modelo').select2('enable', true);
         }
       });
+
       
     </script>
     
