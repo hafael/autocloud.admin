@@ -91,8 +91,8 @@
 			$this->data_base_object->where('TB_Anunciante_id', $id_anunciante);
 			$this->data_base_object->where('TB_Anuncio_id', $id_anuncio);
 			$this->data_base_object->where('Ativo', true);
-			$this->data_base_object->order_by('id', 'desc');
-			$this->data_base_object->order_by('IndexList', 'desc');
+			$this->data_base_object->order_by('id', 'asc');
+			//$this->data_base_object->order_by('IndexList', 'asc');
 			$this->data_base_object->limit(6);
 
 

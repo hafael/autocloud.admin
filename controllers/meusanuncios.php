@@ -46,9 +46,6 @@ class MeusAnuncios extends CI_Controller {
 
 	public function index(){
 		
-        
-		
-
 		$data['array_anuncios'] = $this->anuncio->lista($this->anunciante->id);
 
 		$this->load->view('meus-anuncios', $data);
@@ -187,46 +184,6 @@ class MeusAnuncios extends CI_Controller {
 		$this->anuncio_imagens->desativa($this->anuncio->id, $this->anuncio->TB_Anunciante_id, $id_imagem);
 		redirect(base_url().'meusanuncios/anuncio/'.$this->anuncio->id, 'refresh');
 	}
-	public function get_fabricantes(){
-		$this->load->model('TB_FabricanteVeiculo','fabricante');
-
-		header('Content-Type: application/x-json; charset=utf-8');
-
-		echo json_encode($this->fabricante->lista());
-		
-	}
-	public function get_modelos($id){
-		$this->load->model('TB_ModeloVeiculo','modelo');
-
-		header('Content-Type: application/x-json; charset=utf-8');
-
-		echo json_encode($this->modelo->lista($id));
-		
-	}
-	public function get_ano_fab($id){
-		$this->load->model('TB_AnoFabricacaoVeiculo','anoFab');
-
-		header('Content-Type: application/x-json; charset=utf-8');
-
-		echo json_encode($this->anoFab->lista($id));
-		
-	}
-	public function get_ano_mod($id){
-		$this->load->model('TB_AnoModeloVeiculo','anoMod');
-
-		header('Content-Type: application/x-json; charset=utf-8');
-
-		echo json_encode($this->anoMod->lista($id));
-		
-	}
-	public function get_versao($id){
-		$this->load->model('TB_VersaoVeiculo','versao');
-
-		header('Content-Type: application/x-json; charset=utf-8');
-
-		echo json_encode($this->versao->lista($id));
-		
-	}
 
 	// Upload & Resize in action
 	
@@ -234,17 +191,17 @@ class MeusAnuncios extends CI_Controller {
 
     	$this->anuncio->define($id_anuncio);
 
-        // New name
-        $new_file_name = md5(date('Y m d H:i:s').uniqid(mt_rand()));
+        // // New name
+        // $new_file_name = md5(date('Y m d H:i:s').uniqid(mt_rand()));
 
-        $upload_conf = array(
-            'upload_path'   =>  realpath('uploads'),
-            'allowed_types' => 'gif|jpg|png',
-            'max_size'      => '30000',
-            'file_name'     => $new_file_name
-            );
+        // $upload_conf = array(
+        //     'upload_path'   =>  realpath('uploads'),
+        //     'allowed_types' => 'gif|jpg|png',
+        //     'max_size'      => '30000',
+        //     'file_name'     => $new_file_name
+        //     );
     
-        $this->upload->initialize( $upload_conf );
+        // $this->upload->initialize( $upload_conf );
     
         // Change $_FILES to new vars and loop them
         if($_FILES['userfile']){
@@ -271,6 +228,18 @@ class MeusAnuncios extends CI_Controller {
 	        foreach($_FILES as $field_name => $file)
 	        {
 
+	        	// New name
+		        $new_file_name = md5($this->anuncio->id.'_'.date('Y m d H:i:s').'_'.uniqid(mt_rand()));
+
+		        $upload_conf = array(
+		            'upload_path'   =>  realpath('uploads'),
+		            'allowed_types' => 'gif|jpg|png',
+		            'max_size'      => '30000',
+		            'file_name'     => $new_file_name
+		        );
+		    
+		        $this->upload->initialize( $upload_conf );
+
 	            if ( ! $this->upload->do_upload($field_name))
 	            {
 	                // if upload fail, grab error 
@@ -292,7 +261,8 @@ class MeusAnuncios extends CI_Controller {
 						'TB_Anunciante_id' => $this->anunciante->id,
 						'TB_Anuncio_id' => $id_anuncio,
 						'IndexList' => $IndexList,
-						'ImageSRC' => $upload_data['file_name']
+						'ImageSRC' => $upload_data['file_name'],
+						'Ativo' => true
 					);
 	                $this->anuncio_imagens->adiciona($array_tb_anuncio);
 	                $IndexList++;
@@ -308,7 +278,7 @@ class MeusAnuncios extends CI_Controller {
 	                    'width'          => 1000,
 	                    'height'         => 1000,
 	                    'maintain_ratio' => TRUE
-	                    );
+	                );
 
 	                // initializing
 	                $this->image_lib->initialize($resize_high);

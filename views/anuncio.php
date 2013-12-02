@@ -73,7 +73,7 @@
                     <div class="img-polaroid">
                       <img src="<?=base_url().APPPATH?>views/img/img_140x140.png" >
                     </div>
-                    <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
+                    <input type="file" accept="image/*" name="userfile[]" title="Selecionar..." class="btn-block clearfix btn-primary">
                   </div>
                   <?php
                   $i++;
@@ -89,7 +89,7 @@
                   <div class="img-polaroid">
                     <img src="<?=base_url().APPPATH?>views/img/img_140x140.png" >
                   </div>
-                  <input type="file" name="userfile[]" value="" multiple="1" title="Selecionar..." class="btn-block clearfix btn-primary">
+                  <input type="file" accept="image/*" name="userfile[]" title="Selecionar..." class="btn-block clearfix btn-primary">
                 </div>
                 <?php
                 $i++;
