@@ -10,19 +10,19 @@
 
     <?php include_once('includes/navbar.php') ?>
 
-    <div class="container">
+    <div class="container escolha-anuncio">
       <h1>Criar novo anúncio</h1>
       <p class="lead">Qual tipo de veículo deseja anunciar?</p>
-      <div class="row-fluid">
-        <div class="span3">
+      <div class="row-fluid tipo-veiculo">
+        <div class="span3 veiculo carro">
           <h3>Carro</h3>
-          <img src="<?=base_url()?>uploads/img_140x140.png" class="img-polaroid">
-          <p><a class="btn btn-primary btn-large" href="novo-anuncio-carro">Anunciar</a></p>
+          <img src="<?=base_url().APPPATH?>views/img/carsale.jpg">
+          <a class="btn btn-primary btn-large btn-block" href="novo-anuncio-carro">Anunciar</a>
         </div>
-        <div class="span3">
+        <div class="span3 veiculo moto">
           <h3>Moto</h3>
-          <img src="<?=base_url()?>uploads/img_140x140.png" class="img-polaroid">
-          <p><a class="btn btn-primary btn-large" href="novo-anuncio-moto">Anunciar</a></p>
+          <img src="<?=base_url().APPPATH?>views/img/bikesale.jpg">
+          <a class="btn btn-primary btn-large btn-block" href="novo-anuncio-moto">Anunciar</a>
         </div>
       </div>
       

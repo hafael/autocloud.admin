@@ -245,11 +245,11 @@
             <?php 
             if($this->anuncio->Status){
               ?>
-              <li><a href="<?=base_url()?>admin/meusanuncios/desativa/<?=$this->anuncio->id?>">Desativar anúncio</a></li>
+              <li><a href="<?=base_url()?>meusanuncios/desativa/<?=$this->anuncio->id?>">Desativar anúncio</a></li>
               <?php
             }else{
               ?>
-              <li><a href="<?=base_url()?>admin/meusanuncios/ativa/<?=$this->anuncio->id?>">Ativar anúncio</a></li>
+              <li><a href="<?=base_url()?>meusanuncios/ativa/<?=$this->anuncio->id?>">Ativar anúncio</a></li>
               <?php
             }
             ?>
@@ -287,6 +287,6 @@
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-    <a href="<?=base_url()?>admin/meusanuncios/remove/<?=$this->anuncio->id?>" class="btn btn-danger">Remover</a>
+    <a href="<?=base_url()?>meusanuncios/remove/<?=$this->anuncio->id?>" class="btn btn-danger">Remover</a>
   </div>
 </div>

@@ -221,7 +221,7 @@
     <div class="control-group">
       <label class="control-label" for="tel_contato">Telefone para contato</label>
       <div class="controls">
-        <input type="text" class="disabled" id="tel_contato" name="tel_contato" value="(21) 8083-6612" >
+        <input type="text" class="disabled" id="tel_contato" name="tel_contato" value="<?=$this->anunciantePF->TelefonePrincipal?>" >
         <div class="help"><a href="#">Usar outro número</a></div>
       </div>
     </div>

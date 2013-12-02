@@ -28,7 +28,7 @@ $.ajax({
   dataType: 'jsonp',
   url: endpoint+'vehicles/brands/type/'+tipo_veiculo,
   success: function (data){
-    $('#fabricante').append('<option disabled></option>');
+    $('#fabricante').parents('.control-group').removeClass('loading');
     $.each(data.brands, function(i, brand){
       $('#fabricante').append('<option value="'+brand.id+'">'+brand.name+'</option>');
     });
@@ -48,6 +48,7 @@ $.ajax({
   url: endpoint+'places/states',
   success: function (data){
     $('#estado').append('<option disabled></option>');
+    $('#estado').parents('.control-group').removeClass('loading');
     $.each(data.states, function(i, state){
       $('#estado').append('<option value="'+state.id+'">'+state.name+'</option>');
     });
@@ -66,6 +67,7 @@ $.ajax({
   url: endpoint+'places/cities/id/'+id_estado,
   success: function (data){
     $('#cidade').append('<option disabled></option>');
+    $('#cidade').parents('.control-group').removeClass('loading');
     $.each(data.cities, function(i, city){
       $('#cidade').append('<option value="'+city.id+'">'+city.name+'</option>');
     });
@@ -81,6 +83,7 @@ $.ajax({
 $('#fabricante').change(function(){
   var fabricante_id = $(this).val();
   $('#modelo').html('<option value="false">Aguarde</option>');
+  $('#modelo').parents('.control-group').addClass('loading');
   $.ajax({
     type: 'GET',
     crossDomain: true,
@@ -88,6 +91,7 @@ $('#fabricante').change(function(){
     url: endpoint+'vehicles/models/id/'+fabricante_id+'/type/'+tipo_veiculo,
     success: function (data){
       $('#modelo').html('<option></option>');
+      $('#modelo').parents('.control-group').removeClass('loading');
       $.each(data.models, function(i, model){
         $('#modelo').append('<option value="'+model.id+'">'+model.name+'</option>');
       });
@@ -208,6 +212,7 @@ $('#estado').change(function(){
   var fabricante_id = $(this).val();
   $('#cidade').empty();
   $('#cidade').append('<option value="false">Aguarde</option>');
+  $('#cidade').parents('.control-group').addClass('loading');
   $.ajax({
     type: 'GET',
     crossDomain: true,
@@ -215,6 +220,7 @@ $('#estado').change(function(){
     url: endpoint+'places/cities/id/'+fabricante_id,
     success: function (data){
       $('#cidade').html('<option></option>');
+      $('#cidade').parents('.control-group').removeClass('loading');
       $.each(data.cities, function(i, city){
         $('#cidade').append('<option value="'+city.id+'">'+city.name+'</option>');
       });

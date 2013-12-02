@@ -1,10 +1,72 @@
-.container{
-	width: 940px;
+/* Form General */
+form .control-group .help-inline.loading{
+	display: none;
+}
+form .control-group.loading .help-inline.loading{
+	display: inline-block;
 }
 
-/* Novo Anuncio */
+/* Cadastro */
+.login-cadastro h1.title {
+	margin-bottom: 60px
+}
+.login-cadastro .cadastro {
+	margin-top: -18px;
+	padding-left: 30px;
+}
+.dados-cadastro .control-group .control-label{
+	width: 120px;
+}
+.dados-cadastro .control-group .controls {
+	margin-left: 140px;
+}
+.dados-cadastro form#login,
+.dados-cadastro form#cadastro .control-group:not(.visible) {
+	display: none;
+}
+.dados-cadastro .controls input {
+	padding-right: 22px;
+}
+.dados-cadastro .controls .icon-ok {
+	margin-left: -20px;
+	margin-right: 5px;
+	color: #468847;
+	display: none;
+}
+.dados-cadastro .success .controls .icon-ok {
+	display: inline-block;
+}
+.dados-cadastro form#login{
+	margin-left: 0;
+}
+.dados-cadastro .email .help-inline,
+.dados-cadastro .email .help-inline,
+.dados-cadastro .resenha .help-inline,
+.dados-cadastro .estado .help-inline,
+.dados-cadastro .cidade .help-inline,
+.dados-cadastro .telefone .help-inline{
+	display: none;
+}
+.dados-cadastro .email.success .help-inline.valid,
+.dados-cadastro .email.error .help-inline.invalid,
+.dados-cadastro .resenha.error .help-inline.invalid,
+.dados-cadastro .estado.error .help-inline.invalid,
+.dados-cadastro .cidade.error .help-inline.invalid,
+.dados-cadastro .email.warning .help-inline.joined,
+.dados-cadastro .telefone.error .help-inline.invalid{
+	display: inline-block;
+}
 
+/* Escolha Anuncio */
 
+.escolha-anuncio .veiculo {
+	min-height: 290px;
+	position: relative;
+}
+.escolha-anuncio .veiculo .btn{
+	position: absolute;
+	bottom: 0;
+}
 
 /* Footer */
 

@@ -14,7 +14,9 @@
       <h1>Meus Anúncios</h1>
       
       <div class="row-fluid">
-        
+        <?php
+        if($array_anuncios){
+        ?>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -26,6 +28,7 @@
           </thead>
           <tbody>
             <?php
+            
             foreach ($array_anuncios as $row) {
             ?>
             <tr>
@@ -47,10 +50,18 @@
             </tr>
             <?php
             }
+            
             ?>
           </tbody>
         </table>
-
+        <?php
+        }else{
+        ?>
+          <h3>Você ainda nao tem nenhum anuncio cadastrado</h3>
+          <p>Comece a <a href="<?=base_url()?>novo-anuncio/">criar seus anúncios</a>.</p>
+        <?php
+        }// fecha if array_anuncios
+        ?>
       </div>
       
       <?php include_once('includes/footer.php') ?>

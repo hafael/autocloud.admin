@@ -8,6 +8,7 @@
 		var $id;
 		var $TB_Anunciante_id;
 		var $NomeAnunciante;
+		var $TelefonePrincipal;
 
 		var $nome_tabela;
 		var $data_base_object;
@@ -33,6 +34,7 @@
 				$this->id = $id['id'];
 				$this->TB_Anunciante_id = $id['TB_Anunciante_id'];
 				$this->NomeAnunciante = $id['NomeAnunciante'];
+				$this->TelefonePrincipal = $id['TelefonePrincipal'];
 								
 				return true;
 				
@@ -41,6 +43,7 @@
 				$this->id = $id->id;
 				$this->TB_Anunciante_id = $id->TB_Anunciante_id;
 				$this->NomeAnunciante = $id->NomeAnunciante;
+				$this->TelefonePrincipal = $id->TelefonePrincipal;
 							
 				return true;
 
@@ -63,6 +66,7 @@
 						$this->id = $row->id;
 					    $this->TB_Anunciante_id = $row->TB_Anunciante_id;
 					    $this->NomeAnunciante = $row->NomeAnunciante;
+					    $this->TelefonePrincipal = $row->TelefonePrincipal;
 				    
 					}
 				}

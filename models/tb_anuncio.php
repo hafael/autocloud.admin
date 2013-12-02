@@ -119,11 +119,15 @@
 			//executa query
 			$query = $this->data_base_object->get_where($this->nome_tabela);
 			//$query = $this->data_base_object->get();
-
-			foreach ($query->result() as $row){
-				$array_objetos[] = $row;
+			if($query->num_rows() > 0){
+				foreach ($query->result() as $row){
+					$array_objetos[] = $row;
+				}
+				return $array_objetos;
+			}else {
+				return false;
 			}
-			return $array_objetos;
+			
 	    }
 
 	    function adiciona($array_dados){

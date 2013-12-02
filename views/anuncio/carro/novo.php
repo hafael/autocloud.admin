@@ -1,12 +1,13 @@
 <form id="novo-anuncio" class="form-horizontal" method="POST">
   <div class="span6">
     <h3>Selecione o veículo</h3>
-    <div class="control-group">
+    <div class="control-group loading">
       <label class="control-label" for="fabricante">Marca</label>
       <div class="controls">
         <select id="fabricante" name="fabricante" disabled>
-          <option>Aguarde</option>
+          <option></option>
         </select>
+        <span class="help-inline loading"><i class="icon-refresh"></i> <small> Aguarde</small></span>
       </div>
     </div>
     <div class="control-group">
@@ -15,12 +16,14 @@
         <select id="modelo" name="modelo" disabled>
           <option></option>
         </select>
+        <span class="help-inline loading"><i class="icon-refresh"></i> <small> Aguarde</small></span>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="anoFab">Ano de fabricação</label>
       <div class="controls">
         <select id="anoFab" name="anoFab">
+          <option>Selecione o ano</option>
           <option value="2014">2014</option>
           <option value="2013">2013</option>
           <option value="2012">2012</option>
@@ -162,7 +165,7 @@
       <label class="control-label" for="anoMod">Ano do modelo</label>
       <div class="controls">
         <select id="anoMod" name="anoMod" disabled>
-          <option>Selecione</option>
+          
         </select>
       </div>
     </div>
@@ -190,6 +193,7 @@
         <select id="estado" name="estado">
           <option value="<?=$this->anunciante->TB_Estado_id?>"><?=$this->anunciante->TB_Estado_Nome?></option>
         </select>
+        <span class="help-inline loading"><i class="icon-refresh"></i> <small> Aguarde</small></span>
       </div>
     </div>
     <div class="control-group">
@@ -198,6 +202,7 @@
         <select id="cidade" name="cidade">
           <option value="<?=$this->anunciante->TB_Cidade_id?>"><?=$this->anunciante->TB_Cidade_Nome?></option>
         </select>
+        <span class="help-inline loading"><i class="icon-refresh"></i> <small> Aguarde</small></span>
       </div>
     </div>
   </div>
@@ -302,7 +307,7 @@
     <div class="control-group">
       <label class="control-label" for="tel_contato">Telefone para contato</label>
       <div class="controls">
-        <input type="text" class="span5" id="tel_contato" name="tel_contato" value="(21) 8083-6612" >
+        <input type="text" class="span5" id="tel_contato" name="tel_contato" value="<?=$this->anunciantePF->TelefonePrincipal?>" >
         <div class="help-inline">Será exibido no anúncio</div>
       </div>
     </div>
