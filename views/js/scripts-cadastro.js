@@ -81,7 +81,6 @@ $(function() {
 	$('.dados-cadastro .filled#senha, .dados-cadastro #resenha ').on('focusout', function(){
 		var senha = $('.dados-cadastro #senha').val();
 		var resenha = $('.dados-cadastro #resenha').val();
-		alert('senha lendo');
 		if(senha == resenha){
 			$('.dados-cadastro #resenha, .dados-cadastro #senha').parents('.control-group').removeClass('error').addClass('success');
 		}else{

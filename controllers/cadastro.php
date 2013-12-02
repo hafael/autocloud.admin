@@ -36,7 +36,25 @@ class Cadastro extends CI_Controller {
 		redirect('login', 'refresh');
     }
     public function novo(){
-	   if($this->input->post('nome')!='' && 
+
+    	//
+		// Config de email ao cliente
+		// 
+		
+		$email_config = Array(
+	        'protocol'  => 'smtp',
+	        'smtp_host' => 'ssl://smtp.googlemail.com',
+	        'smtp_port' => '465',
+	        'smtp_user' => 'contato@autocloud.com.br',
+	        'smtp_pass' => 'rafael655321',
+	        'mailtype'  => 'html',
+	        'starttls'  => true,
+	        'newline'   => "\r\n"
+	    );
+	 
+	    $this->load->library('email', $email_config);
+
+	   	if($this->input->post('nome')!='' && 
 	   	  $this->input->post('email')!='' && 
 	   	  $this->input->post('senha')!='' && 
 	   	  $this->input->post('resenha')!='' && 
@@ -55,6 +73,21 @@ class Cadastro extends CI_Controller {
 
 			$this->anunciante->adiciona($array_tb_anunciante);
 
+			//
+			// instancia de email ao cliente
+			// 
+			$this->email->from('contato@autocloud.com.br', 'Autocloud');
+		    $this->email->reply_to('contato@autocloud.com.br', 'Contato Autocloud');
+		    $this->email->to( $this->input->post('email') );
+		    $this->email->subject('Seja bem-vindo ao Autocloud');
+		    $data_cliente = array( 'nome' => $this->input->post('nome'),
+		    					   'email' => $this->input->post('email'),
+		    					   'estado' => $this->input->post('EstadoText'),
+		    					   'cidade' => $this->input->post('CidadeText'),
+		    					   'telefone' => $this->input->post('telefone') );
+		    $email= $this->load->view('email_template/novo_cadastro', $data_cliente, TRUE);
+		 	$this->email->message( $email );
+
 			if($this->anunciante->TipoAnunciante==1){
 
 				$array_tb_anunciantePF = array(
@@ -69,10 +102,18 @@ class Cadastro extends CI_Controller {
 						
 					$this->session->set_userdata('id_login', $this->anunciante->id);
 					$this->session->set_userdata('logged', true);
+
+					//
+					// Envio de email ao cliente
+					// 
+				    $this->email->message( $email );
+				    $this->email->send();
 					
 					redirect('novo-anuncio', 'refresh');
 				};
 			}
+
+			
 
         }
 	}
