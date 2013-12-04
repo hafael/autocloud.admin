@@ -47,6 +47,30 @@ class Login extends CI_Controller {
 		}
 		
     }
+    function gerartoken() {
+    	$this->load->model('TB_TokenPassword','token');
+
+    	if($this->input->post('email')){
+    		if($this->anunciante->verifica_email($this->input->post('email')) == true){
+    			$token = substr(uniqid(mt_rand()),0,4);
+
+	    		if($this->token->adiciona($this->input->post('email'), $token)){
+	    			redirect('login/recuperar-senha', 'refresh');
+	    		}else{
+	    			redirect('login/esqueci-minha-senha/?token=false', 'refresh');
+	    		}
+    		}else{
+    			redirect('login/esqueci-minha-senha/?email=false', 'refresh');
+    		}
+    		
+        }
+        $this->load->view('esqueci-senha');
+    }
+    function recuperarsenha() {
+    	$this->load->model('TB_TokenPassword','token');
+    	
+        $this->load->view('recuperar-senha-token');
+    }
     
     public function logout(){
 	   $this->session->unset_userdata('logged');

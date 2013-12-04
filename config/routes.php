@@ -47,6 +47,8 @@ $route['novo-anuncio-carro'] = "novoanuncio/carro";
 $route['novo-anuncio-moto'] = "novoanuncio/moto";
 $route['meus-dados'] = "meusdados";
 $route['alterar-senha'] = "alterarsenha";
+$route['login/esqueci-minha-senha'] = "login/gerartoken";
+$route['login/recuperar-senha'] = "login/recuperarsenha";
 
 /* Generic Routes*/
 $route['404_override'] = '';

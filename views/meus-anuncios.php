@@ -57,7 +57,7 @@
         <?php
         }else{
         ?>
-          <h3>Você ainda nao tem nenhum anuncio cadastrado</h3>
+          <h3>Você ainda não tem nenhum anúncio cadastrado.</h3>
           <p>Comece a <a href="<?=base_url()?>novo-anuncio/">criar seus anúncios</a>.</p>
         <?php
         }// fecha if array_anuncios

@@ -10,6 +10,11 @@ var fabricante_id = $('#fabricante').val();
 var id_estado = $('#estado').val();
 
 $(document).ready(function(){
+  $('input, select').keypress(function (e) {
+        var code = null;
+        code = (e.keyCode ? e.keyCode : e.which);                
+        return (code == 13) ? false : true;
+  });
   $('input[type=file]').bootstrapFileInput();
   $("#valor_venda").maskMoney({thousands:'.', decimal:','});
 });

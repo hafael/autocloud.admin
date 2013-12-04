@@ -25,7 +25,7 @@
               <label class="control-label" for="senha">Senha</label>
               <div class="controls">
                 <input type="password" id="senha" name="senha" class="span6">
-                <div class="help-inline"><a href="#">Esqueci minha senha</a></div>
+                <div class="help-inline"><a href="<?=base_url()?>login/esqueci-minha-senha/">Esqueci minha senha</a></div>
               </div>
             </div>
             <div class="control-group">

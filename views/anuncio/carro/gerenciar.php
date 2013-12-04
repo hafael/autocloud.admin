@@ -316,7 +316,7 @@
 
     <div class="control-group">
       <div class="controls">
-        <div class="btn-group pull-right">
+        <div class="btn-group">
           <button class="btn btn-danger btn-large dropdown-toggle" data-toggle="dropdown">Ações <span class="caret"></span></button>
           <ul class="dropdown-menu">
             <?php 

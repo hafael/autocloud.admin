@@ -94,59 +94,6 @@
 
 	    }
 
-	    function verificaEmail($email){
-
-	    	$array_objetos = array();
-	    	$array_objetos['status'] = 500;
-			$this->load->database();
-		    $query = $this->db->query("SELECT id, TipoAnunciante, Email  FROM TB_Anunciante WHERE Email = '".$email."' LIMIT 1");
-		    if($query->num_rows() > 0){
-		    	foreach ($query->result() as $row){
-					//$array_objetos['result'] = $row['id'];
-					$array_objetos['result'] = $row;
-					$array_objetos['status'] = 200;
-				}
-		    }else{
-		    	$array_objetos['status'] = 400;
-		    }
-
-		    
-			return $array_objetos;
-
-
-
-			/*******************************************************/
-
-	    }
-
-	    function _adiciona($array_dados){		
-			
-			//load database
-			//$this->data_base_object = $this->load->database($this->config_database,true);
-			
-			//cria consulta
-			//$this->data_base_object->insert($this->nome_tabela, $array_dados);
-	    	
-
-	    	$arrayTB_Anunciante = array(
-	    		'TipoAnunciante' => $array_dados['TipoAnunciante'],
-	    		'Email' => $array_dados['Email'],
-	    		'Password' => $array_dados['Password']
-	    	);
-	    	
-	    	$this->load->database();
-	    	$this->db->insert('TB_Anunciante', $arrayTB_Anunciante);
-
-	    	$arrayTB_PessoaFisica = array(
-	    		'NomeAnunciante' => $array_dados['NomeAnunciante'],
-	    		'TB_Anunciante_id' => $this->db->insert_id()
-	    	);
-
-	    	$this->db->insert('TB_AnunciantePessoaFisica', $arrayTB_PessoaFisica);
-
-				    	
-	    }
-
 	    function autentica_login($login, $senha){
     		//load database
 			$this->data_base_object = $this->load->database($this->config_database,true);
@@ -166,6 +113,26 @@
 			}
 			
 			return false;
+	
+	    }
+	    function verifica_email($email){
+    		//load database
+			$this->data_base_object = $this->load->database($this->config_database,true);
+			
+			//cria consulta
+			$this->data_base_object->where('Email = ', $email);
+			$this->data_base_object->where('Ativo = ', true);
+			$this->data_base_object->limit(1);
+			
+			//executa query
+			$query = $this->data_base_object->get_where($this->nome_tabela); 
+			//$query = $this->db->get($this->nome_tabela);
+
+			if($query->num_rows()==1){
+				return true;
+			}else{
+				return false;
+			}
 	
 	    }
 
