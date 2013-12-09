@@ -51,11 +51,46 @@ class Login extends CI_Controller {
     	$this->load->model('TB_TokenPassword','token');
 
     	if($this->input->post('email')){
-    		if($this->anunciante->verifica_email($this->input->post('email')) == true){
+    		$email_result_id = $this->anunciante->verifica_email($this->input->post('email'));
+    		if($email_result_id != false){
     			$token = substr(uniqid(mt_rand()),0,4);
 
-	    		if($this->token->adiciona($this->input->post('email'), $token)){
-	    			redirect('login/recuperar-senha', 'refresh');
+	    		if($this->token->adiciona($email_result_id, $this->input->post('email'), $token)){
+
+	    			//
+					// Config de email ao cliente
+					// 
+					$email_config = Array(
+				        'protocol'  => 'smtp',
+				        'smtp_host' => 'ssl://smtp.googlemail.com',
+				        'smtp_port' => '465',
+				        'smtp_user' => 'contato@autocloud.com.br',
+				        'smtp_pass' => 'rafael655321',
+				        'mailtype'  => 'html',
+				        'starttls'  => true,
+				        'newline'   => "\r\n"
+				    );
+				    $this->load->library('email', $email_config);
+
+				    //
+					// instancia de email ao cliente
+					// 
+					$this->email->from('contato@autocloud.com.br', 'Autocloud');
+				    $this->email->reply_to('contato@autocloud.com.br', 'Autocloud');
+				    $this->email->to( $this->input->post('email') );
+				    $this->email->subject('Recuperar senha - Autocloud');
+				    $data_cliente = array( 'email' => $this->input->post('email'),
+				    					   'token' => $token);
+				    $email = $this->load->view('email_template/recuperar_senha', $data_cliente, TRUE);
+				 	$this->email->message( $email );
+
+				 	//
+					// Envio de email ao cliente
+					// 
+				    $this->email->message( $email );
+				    $this->email->send();
+
+	    			redirect('login/recuperar-senha/?email='.$this->input->post('email'), 'refresh');
 	    		}else{
 	    			redirect('login/esqueci-minha-senha/?token=false', 'refresh');
 	    		}
@@ -68,6 +103,18 @@ class Login extends CI_Controller {
     }
     function recuperarsenha() {
     	$this->load->model('TB_TokenPassword','token');
+    	if($this->input->post('token')){
+    		$array_token = $this->token->valida($this->input->get('email'), $this->input->post('token'));
+	    	if($array_token != false){
+	    		if($this->token->mata_token($array_token['TB_Anunciante_id'], $this->input->get('email'), $this->input->post('token'))){
+	    			if($this->anunciante->nova_senha($array_token['TB_Anunciante_id'], $this->input->post('senha'))){
+		    			redirect(base_url().'login', 'refresh');
+		    		}
+	    		}
+	    		
+	    	}
+    	}
+    	
     	
         $this->load->view('recuperar-senha-token');
     }

@@ -129,7 +129,9 @@
 			//$query = $this->db->get($this->nome_tabela);
 
 			if($query->num_rows()==1){
-				return true;
+				foreach ($query->result() as $row){
+					return $row->id;
+				}
 			}else{
 				return false;
 			}

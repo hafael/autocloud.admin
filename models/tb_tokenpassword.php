@@ -6,6 +6,7 @@
 
 		/* Campos */
 		var $id;
+		var $TB_Anunciante_id;
 		var $TB_Anunciante_Email;
 		var $Token;
 		var $Usado;
@@ -32,6 +33,7 @@
 	    	if(is_array($id)){
 				
 				$this->id = $id['id'];
+				$this->TB_Anunciante_id = $id['TB_Anunciante_id'];
 				$this->TB_Anunciante_Email = $id['TB_Anunciante_Email'];
 				$this->Token = $id['Token'];
 				$this->Usado = $id['Usado'];
@@ -41,6 +43,7 @@
 			}else if(is_object($id)){
 				
 				$this->id = $id->id;
+				$this->TB_Anunciante_id = $id->TB_Anunciante_id;
 				$this->TB_Anunciante_Email = $id->TB_Anunciante_Email;
 				$this->Token = $id->Token;
 				$this->Usado = $id->Usado;
@@ -64,6 +67,7 @@
 					}else{
 					
 						$this->id = $row->id;
+					    $this->TB_Anunciante_id = $row->TB_Anunciante_id;
 					    $this->TB_Anunciante_Email = $row->TB_Anunciante_Email;
 					    $this->Token = $row->Token;
 					    $this->Usado = $row->Usado;
@@ -78,31 +82,34 @@
 
 	    }
 
-	    function verifica_token($email, $token){
+	    function valida($email, $token){
     		//load database
 			$this->data_base_object = $this->load->database($this->config_database,true);
 			
 			//cria consulta
-			$this->data_base_object->where('TB_Anunciante_Email = ', $email);
-			$this->data_base_object->where('Token = ', $token);
+			$this->data_base_object->where('TB_Anunciante_Email = ', (string)$email);
+			$this->data_base_object->where('Token = ', (int)$token);
 			$this->data_base_object->where('Usado = ', false);
 			$this->data_base_object->limit(1);
 			
 			//executa query
 			$query = $this->data_base_object->get_where($this->nome_tabela); 
 
-			if($query->num_rows()==1){
-				return true;
-			}else{
+			if($query->num_rows() == 1){
+				foreach ($query->result() as $row){
+					$array_objetos[] = $row;
+				}
+				return $array_objetos;
+			}else {
 				return false;
 			}
 	
 	    }
 
 
-	    function adiciona($email, $token){
+	    function adiciona($id, $email, $token){
 
-	    	$array_dados = array('TB_Anunciante_Email' => (string)$email, 'Token' => (int)$token);
+	    	$array_dados = array('TB_Anunciante_id' => (int)$id, 'TB_Anunciante_Email' => (string)$email, 'Token' => (int)$token);
     		//load database
 			$this->data_base_object = $this->load->database($this->config_database,true);
 			
@@ -117,13 +124,14 @@
 	
 	    }
 
-	    function mata_token($id_anunciante){
+	    function mata_token($id, $email, $token){
     		//load database
 			$this->data_base_object = $this->load->database($this->config_database,true);
 			
 			//cria consulta
-			$this->data_base_object->where('TB_Anunciante_Email =', $id_anunciante);
-			$this->data_base_object->where('Token =', $token);
+			$this->data_base_object->where('TB_Anunciante_id =', (int)$id);
+			$this->data_base_object->where('TB_Anunciante_Email =', (string)$email);
+			$this->data_base_object->where('Token =', (int)$token);
 			$this->data_base_object->where('Usado =', false);
 			$this->data_base_object->update($this->nome_tabela, array('Usado' => true));
 			
